@@ -84,9 +84,6 @@ namespace TJRJ.Domain.Services
             return result == null ? false : true;
         }
 
-
-
-
         private async Task<bool> VerificarSeNomeJaExiste(string nome)
         {
             var result = await _unitOfWork.RepositoryAutor.Listar();
@@ -98,10 +95,5 @@ namespace TJRJ.Domain.Services
             var result = await _unitOfWork.RepositoryAutor.Listar();
             return result.Where(p => p.Nome.ToUpper() == nome.ToUpper() && p.CodAu != codAu).Any();
         }
-
-
-
-
-
     }
 }
