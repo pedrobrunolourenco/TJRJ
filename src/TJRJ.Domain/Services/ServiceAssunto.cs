@@ -20,6 +20,11 @@ namespace TJRJ.Domain.Services
             return await _unitOfWork.RepositoryAssunto.Listar();
         }
 
+        public async Task<Assunto> ObterAssuntoPorId(int id)
+        {
+            return await _unitOfWork.RepositoryAssunto.BuscarAssuntoPorId(id);
+        }
+
         public async Task<Assunto> IncluirAssunto(Assunto assunto)
         {
             if (!assunto.Validar()) return assunto;
@@ -33,6 +38,7 @@ namespace TJRJ.Domain.Services
         public async Task<Assunto> AlterarAssunto(Assunto assunto)
         {
             if (!assunto.Validar()) return assunto;
+            if (!await VerificarSeIdJaExiste(assunto.CodAs)) assunto.ListaErros.Add($"O ID {assunto.CodAs} não foi localizado.");
             var errosDominio = await ValidarRegrasDeDominioNaAlteracao(assunto);
             if (errosDominio.ListaErros.Any()) return assunto;
             await _unitOfWork.RepositoryAssunto.Atualizar(assunto);
@@ -46,13 +52,12 @@ namespace TJRJ.Domain.Services
             if (objAssunto == null)
             {
                 var retorno = new Assunto();
-                retorno.ListaErros.Add("Assunto não localizado.");
+                retorno.ListaErros.Add($"O ID {CodAs} não foi localizado.");
                 return retorno;
             }
-            var objAlterado = new Assunto(CodAs, objAssunto.Descricao);
             await _unitOfWork.RepositoryAssunto.Remover(objAssunto);
             await _unitOfWork.Commit();
-            return objAlterado;
+            return objAssunto;
         }
 
         private async Task<Assunto> ValidarRegrasDeDominioNaAlteracao(Assunto assunto)

@@ -5,8 +5,9 @@ namespace TJRJ.Domain.Interfaces.Service
     public interface IServiceAutor
     {
         Task<IEnumerable<Autor>> ObterAutores();
-        Task<Assunto> IncluirAutor(Autor autor);
-        Task<Assunto> AlterarAutor(int CodAu, Autor autor);
-        Task<Assunto> ExcluirAutor(int CodAu);
+        Task<Autor> ObterAutorPorId(int id);
+        Task<Autor> IncluirAutor(Autor autor);
+        Task<Autor> AlterarAutor(int CodAu, Autor autor);
+        Task<Autor> ExcluirAutor(int CodAu);
     }
 }
