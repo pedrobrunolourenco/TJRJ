@@ -11,10 +11,14 @@ namespace TJRJ.Domain.Entities
         {
             CodAs = codAs;
             Descricao = descricao;
+            Livro_Assuntos = new List<Livro_Assunto>();
         }
 
         public int CodAs { get; private set; }
         public string Descricao { get; private set; }
+
+        // Coleção de Livro_Assunto
+        public ICollection<Livro_Assunto> Livro_Assuntos { get; private set; }
 
         public override bool Validar()
         {

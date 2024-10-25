@@ -18,6 +18,11 @@ namespace TJRJ.Domain.Entities
         public int Livro_CodI { get; private set; }
         public int Assunto_CodAs { get; private set; }
 
+        // Propriedades de navegação
+        public Assunto Assunto { get; private set; }
+        public Livro Livro { get; private set; }
+
+
         public override bool Validar()
         {
             ValidationResult = new Livro_AssuntoValidation().Validate(this);

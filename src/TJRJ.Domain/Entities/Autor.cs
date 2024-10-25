@@ -13,10 +13,16 @@ namespace TJRJ.Domain.Entities
         {
             CodAu = codAu;
             Nome = nome;
+            Livro_Autores = new List<Livro_Autor>();
         }
 
         public int CodAu { get; private set; }
         public string Nome { get; private set; }
+
+
+        // Coleção de Livro_Autor
+        public ICollection<Livro_Autor> Livro_Autores { get; private set; }
+
 
         public override bool Validar()
         {

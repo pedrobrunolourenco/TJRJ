@@ -13,6 +13,8 @@ namespace TJRJ.Domain.Entities
             Editora = editora;
             Edicao = edicao;
             AnoPublicacao = anoPublicacao;
+            LivrosAutores = new List<Livro_Autor>();
+            LivroAssuntos = new List<Livro_Assunto>();
         }
 
         public int CodI { get; private set; }
@@ -21,6 +23,8 @@ namespace TJRJ.Domain.Entities
         public int Edicao { get; private set; }
         public string AnoPublicacao { get; private set; }
 
+        public ICollection<Livro_Autor> LivrosAutores { get; private set; }
+        public ICollection<Livro_Assunto> LivroAssuntos { get; private set; }
 
         public override bool Validar()
         {
