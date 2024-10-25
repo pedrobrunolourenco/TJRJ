@@ -17,8 +17,17 @@ namespace TJRJ.Domain.Entities
         public int CodAs { get; private set; }
         public string Descricao { get; private set; }
 
-        // Coleção de Livro_Assunto
         public ICollection<Livro_Assunto> Livro_Assuntos { get; private set; }
+
+        public void AtriuirCodAs(int codAs)
+        {
+            CodAs = codAs;
+        }
+
+        public void AtriuirDescricao(string descricao)
+        {
+            Descricao = descricao;
+        }
 
         public override bool Validar()
         {

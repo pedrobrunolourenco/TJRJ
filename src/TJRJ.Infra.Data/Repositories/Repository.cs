@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using TJRJ.Domain.Entities;
@@ -21,14 +22,9 @@ namespace TJRJ.Infra.Data.Repositories
             DbSet = _context.Set<TEntidade>();
         }
 
-        public async Task<TEntidade> BuscarId(int id)
-        {
-            return await DbSet.FindAsync(id);
-        }
-
         public async Task<IEnumerable<TEntidade>> Listar()
         {
-            return await DbSet.ToListAsync();
+            return await DbSet.AsNoTracking().ToListAsync();
         }
 
         public async Task Adicionar(TEntidade obj)
