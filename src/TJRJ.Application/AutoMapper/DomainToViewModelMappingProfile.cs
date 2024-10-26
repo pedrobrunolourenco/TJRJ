@@ -14,18 +14,7 @@ namespace TJRJ.Application.AutoMapper
                     CodigoAssunto = src.CodAs,
                     Descricao = src.Descricao
                 }))
-                .ForMember(dest => dest.ListaErros, opt => opt.MapFrom(src => src.ListaErros))
-                .ForMember(dest => dest.Sucesso, opt => opt.MapFrom(src => !src.ListaErros.Any()));
-
-
-            CreateMap<List<Assunto>, AssuntoListaRetornoModel>()
-                .ForMember(dest => dest.Assuntos, opt => opt.MapFrom(src => src.Select(a => new AssuntoModel
-                {
-                    CodigoAssunto = a.CodAs,
-                    Descricao = a.Descricao
-                }).ToList()))
-                .ForMember(dest => dest.ListaErros, opt => opt.MapFrom(src => src.SelectMany(a => a.ListaErros).ToList()))
-                .ForMember(dest => dest.Sucesso, opt => opt.MapFrom(src => src.All(a => !a.ListaErros.Any())));
+                .ForMember(dest => dest.ListaErros, opt => opt.MapFrom(src => src.ListaErros));
         }
     }
 }

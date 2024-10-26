@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using TJRJ.Application.Interfaces;
 using TJRJ.Application.Model;
+using TJRJ.Domain.Entities;
 using TJRJ.Domain.Interfaces.Service;
 
 namespace TJRJ.Application.Services
@@ -18,36 +19,28 @@ namespace TJRJ.Application.Services
 
         }
 
-        public async Task<AssuntoListaRetornoModel> ObterAssuntos()
+        public async Task<IEnumerable<AssuntoRetornoModel>> ObterAssuntos()
         {
-            var assuntos = await _serviceAssunto.ObterAssuntos();
-            var retorno = new AssuntoListaRetornoModel
-            {
-                Assuntos = _mapper.Map<List<AssuntoModel>>(assuntos),
-                ListaErros = assuntos.SelectMany(a => a.ListaErros).ToList(),
-                Sucesso = assuntos.All(a => !a.ListaErros.Any())
-            };
-            return retorno;
+            return _mapper.Map<IEnumerable<AssuntoRetornoModel>>(await _serviceAssunto.ObterAssuntos());
         }
-
         public async Task<AssuntoRetornoModel> ObterAssuntoPorId(int id)
         {
-            throw new NotImplementedException();
+            return _mapper.Map<AssuntoRetornoModel>(await _serviceAssunto.ObterAssuntoPorId(id));
         }
 
         public async Task<AssuntoRetornoModel> IncluirAssunto(AssuntoModel assunto)
         {
-            throw new NotImplementedException();
+            return _mapper.Map<AssuntoRetornoModel>(await _serviceAssunto.IncluirAssunto(_mapper.Map<Assunto>(assunto)));
         }
 
         public async Task<AssuntoRetornoModel> AlterarAssunto(AssuntoModel assunto)
         {
-            throw new NotImplementedException();
+            return _mapper.Map<AssuntoRetornoModel>(await _serviceAssunto.AlterarAssunto(_mapper.Map<Assunto>(assunto)));
         }
 
         public async Task<AssuntoRetornoModel> ExcluirAssunto(int CodAs)
         {
-            throw new NotImplementedException();
+            return _mapper.Map<AssuntoRetornoModel>(await _serviceAssunto.ExcluirAssunto(CodAs));
         }
 
 

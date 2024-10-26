@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using TJRJ.Application.Interfaces;
+using TJRJ.Application.Model;
 
 namespace TJRJ.Api.Controllers
 {
@@ -33,6 +34,74 @@ namespace TJRJ.Api.Controllers
                 return BadRequest();
             }
         }
+
+        [HttpGet]
+        [Route("ObterAssuntoPorId")]
+        public async Task<IActionResult> ObterAssuntoPorId(int id)
+        {
+            try
+            {
+                var result = await _appAssunto.ObterAssuntoPorId(id);
+                return RetornoRequest(result);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"ObterAssuntos => {ex.Message}");
+                return BadRequest();
+            }
+        }
+
+
+        [HttpPost]
+        [Route("IncluirAssunto")]
+        public async Task<IActionResult> IncluirAssunto([FromBody] AssuntoModel model)
+        {
+            try
+            {
+                var usuario = await _appAssunto.IncluirAssunto(model);
+                return RetornoRequest(usuario, usuario.ListaErros);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"IncluirAssunto => {ex.Message}");
+                return BadRequest();
+            }
+        }
+
+        [HttpPut]
+        [Route("AlterarAssunto")]
+        public async Task<IActionResult> AlterarAssunto([FromBody] AssuntoModel model)
+        {
+            try
+            {
+                var usuario = await _appAssunto.AlterarAssunto(model);
+                return RetornoRequest(usuario, usuario.ListaErros);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"AlterarAssunto => {ex.Message}");
+                return BadRequest();
+            }
+        }
+
+
+        [HttpDelete]
+        [Route("AlterarAssunto")]
+        public async Task<IActionResult> ExcluirAssunto(int id)
+        {
+            try
+            {
+                var usuario = await _appAssunto.ExcluirAssunto(id);
+                return RetornoRequest(usuario, usuario.ListaErros);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"ExcluirAssunto => {ex.Message}");
+                return BadRequest();
+            }
+        }
+
+
 
     }
 }

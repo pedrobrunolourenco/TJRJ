@@ -2,6 +2,7 @@ using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using TJRJ.Application.AutoMapper;
 using TJRJ.Infra.Data;
+using TJRJ.Ioc;
 
 var builder = WebApplication.CreateBuilder(args);
 

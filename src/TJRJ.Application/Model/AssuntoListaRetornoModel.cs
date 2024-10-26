@@ -10,7 +10,6 @@ namespace TJRJ.Application.Model
             ListaErros = new List<string>();
         }
 
-        public bool Sucesso { get; set; }
         public IEnumerable<AssuntoModel> Assuntos { get; set; }
 
         [IgnoreDataMember]
