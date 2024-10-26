@@ -21,13 +21,10 @@
 	</ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\TJRJ.Application\TJRJ.Application.csproj" />
     <ProjectReference Include="..\TJRJ.Domain\TJRJ.Domain.csproj" />
     <ProjectReference Include="..\TJRJ.Infra.Data\TJRJ.Infra.Data.csproj" />
+    <ProjectReference Include="..\TJRJ.Ioc\TJRJ.Ioc.csproj" />
   </ItemGroup>
 
 </Project>
