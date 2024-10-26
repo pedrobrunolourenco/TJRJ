@@ -6,6 +6,12 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Compile Remove="Migrations\20241026143945_Recriando o banco.cs" />
+    <Compile Remove="Migrations\20241026143945_Recriando o banco.Designer.cs" />
+    <Compile Remove="Migrations\DataContextModelSnapshot.cs" />
+  </ItemGroup>
+
 	<ItemGroup>
 		<PackageReference Include="dapper" Version="1.50.5" />
 		<PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.0">

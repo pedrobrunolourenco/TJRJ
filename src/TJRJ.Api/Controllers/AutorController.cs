@@ -58,8 +58,8 @@ namespace TJRJ.Api.Controllers
         {
             try
             {
-                var usuario = await _appAutor.IncluirAutor(model);
-                return RetornoRequest(usuario, usuario.ListaErros);
+                var autor = await _appAutor.IncluirAutor(model);
+                return RetornoRequest(autor, autor.ListaErros);
             }
             catch (Exception ex)
             {
@@ -74,8 +74,8 @@ namespace TJRJ.Api.Controllers
         {
             try
             {
-                var usuario = await _appAutor.AlterarAutor(model);
-                return RetornoRequest(usuario, usuario.ListaErros);
+                var autor = await _appAutor.AlterarAutor(model);
+                return RetornoRequest(autor, autor.ListaErros);
             }
             catch (Exception ex)
             {
@@ -91,8 +91,8 @@ namespace TJRJ.Api.Controllers
         {
             try
             {
-                var usuario = await _appAutor.ExcluirAutor(codAu);
-                return RetornoRequest(usuario, usuario.ListaErros);
+                var autor = await _appAutor.ExcluirAutor(codAu);
+                return RetornoRequest(autor, autor.ListaErros);
             }
             catch (Exception ex)
             {

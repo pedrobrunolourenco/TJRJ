@@ -19,20 +19,21 @@ namespace TJRJ.Infra.Data.Mappings
             builder.Property(l => l.Editora).IsRequired().HasColumnType("varchar").HasMaxLength(40);
             builder.Property(l => l.Edicao).IsRequired().HasColumnType("int");
             builder.Property(l => l.AnoPublicacao).IsRequired().HasColumnType("varchar").HasMaxLength(4);
+
             builder.Ignore(p => p.ListaErros);
             builder.Ignore(p => p.ValidationResult);
 
 
-            // Configuração o relacionamento 1:N livro -> livro_autor
-            builder.HasMany(l => l.LivrosAutores)
-                   .WithOne()
-                   .HasForeignKey(la => la.Livro_CodI)
-                   .OnDelete(DeleteBehavior.Restrict);
 
-            // Configuração do relacionamento 1:N livro -> livro_assunto
-            builder.HasMany(l => l.LivroAssuntos)
-                   .WithOne(l => l.Livro)
-                   .HasForeignKey(la => la.Livro_CodI)
+            builder.HasMany<Livro_Assunto>()
+                               .WithOne() // Não especificamos uma propriedade de navegação
+                               .HasForeignKey(la => la.Livro_CodI) // Chave estrangeira na entidade LivroAssunto
+                               .OnDelete(DeleteBehavior.Restrict);
+
+            // Configurando relacionamento 1:N com LivroAutor
+            builder.HasMany<Livro_Autor>()
+                   .WithOne() // Não especificamos uma propriedade de navegação
+                   .HasForeignKey(la => la.Livro_CodI) // Chave estrangeira na entidade LivroAutor
                    .OnDelete(DeleteBehavior.Restrict);
 
             builder.ToTable("Livro");

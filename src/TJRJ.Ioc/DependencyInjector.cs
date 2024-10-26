@@ -35,6 +35,7 @@ namespace TJRJ.Ioc
 
             // Livro
             services.AddScoped<IRequestHandler<AdicionarLivroCommand, bool>, LivroCommandHandler>();
+            services.AddScoped<IAppLivro, AppLivro>();
             services.AddScoped<IRepositoryLivro, RepositoryLivro>();
             services.AddScoped<IRepositoryLivroAutor, RepositoryLivroAutor>();
             services.AddScoped<IRepositoryLivroAssunto, RepositoryLivroAssunto>();

@@ -58,6 +58,16 @@ namespace TJRJ.Domain.Commands
                 .NotEmpty().WithMessage("Ano de publicação é obrigatório.")
                 .Matches(@"^\d{4}$").WithMessage("Ano de publicação deve conter exatamente 4 dígitos.")
                 .Must(ValidaAnoPublicacao).WithMessage("Ano de publicação não pode ser maior que o ano corrente.");
+
+            RuleFor(t => t.CodigoAssunto)
+                .GreaterThan(0)
+                .WithMessage("O código do assunto deve ser maior que zero.");
+
+            RuleFor(t => t.CodigoAutor)
+                .GreaterThan(0)
+                .WithMessage("O código do autor deve ser maior que zero.");
+
+
         }
 
         private bool ValidaAnoPublicacao(string ano)

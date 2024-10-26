@@ -21,9 +21,14 @@ namespace TJRJ.Infra.Data.Mappings
                    .HasColumnType("int");
 
             // 1 registro de livro_autor tem 1 autor
-            builder.HasOne(l => l.Autor)
+            builder.HasOne<Autor>()
                    .WithMany(a => a.Livro_Autores)
                    .HasForeignKey(l => l.Autor_CodAu);
+
+            builder.HasOne<Livro>()
+                               .WithMany()
+                               .HasForeignKey(l => l.Livro_CodI)
+                               .OnDelete(DeleteBehavior.Restrict);
 
 
             builder.Ignore(l => l.ListaErros);

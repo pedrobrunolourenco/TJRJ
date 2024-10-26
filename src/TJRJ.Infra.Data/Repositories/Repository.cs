@@ -22,6 +22,18 @@ namespace TJRJ.Infra.Data.Repositories
             DbSet = _context.Set<TEntidade>();
         }
 
+        public void DetachAllEntities()
+        {
+            var changedEntriesCopy = _context.ChangeTracker.Entries()
+                .Where(e => e.State == EntityState.Added ||
+                            e.State == EntityState.Modified ||
+                            e.State == EntityState.Deleted)
+                .ToList();
+
+            foreach (var entry in changedEntriesCopy)
+                entry.State = EntityState.Detached;
+        }
+
         public async Task<IEnumerable<TEntidade>> Listar()
         {
             return await DbSet.AsNoTracking().ToListAsync();

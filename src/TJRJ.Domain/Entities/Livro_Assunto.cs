@@ -12,15 +12,10 @@ namespace TJRJ.Domain.Entities
             Assunto_CodAs = assunto_CodAs;
         }
 
-
-
-
         public int Livro_CodI { get; private set; }
         public int Assunto_CodAs { get; private set; }
 
-        // Propriedades de navegação
-        public Assunto Assunto { get; private set; }
-        public Livro Livro { get; private set; }
+        public Assunto Assunto { get; set; }
 
 
         public override bool Validar()

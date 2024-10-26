@@ -16,12 +16,6 @@ namespace TJRJ.Domain.Entities
         public int Livro_CodI { get; private set; }
         public int Autor_CodAu { get; private set; }
 
-        // Propriedades de navegação
-        public Autor Autor { get; private set; }
-        public Livro Livro { get; private set; }
-
-
-
         public override bool Validar()
         {
             ValidationResult = new Livro_AutorValidation().Validate(this);

@@ -58,8 +58,8 @@ namespace TJRJ.Api.Controllers
         {
             try
             {
-                var usuario = await _appAssunto.IncluirAssunto(model);
-                return RetornoRequest(usuario, usuario.ListaErros);
+                var assunto = await _appAssunto.IncluirAssunto(model);
+                return RetornoRequest(assunto, assunto.ListaErros);
             }
             catch (Exception ex)
             {
@@ -74,8 +74,8 @@ namespace TJRJ.Api.Controllers
         {
             try
             {
-                var usuario = await _appAssunto.AlterarAssunto(model);
-                return RetornoRequest(usuario, usuario.ListaErros);
+                var assunto = await _appAssunto.AlterarAssunto(model);
+                return RetornoRequest(assunto, assunto.ListaErros);
             }
             catch (Exception ex)
             {
@@ -91,8 +91,8 @@ namespace TJRJ.Api.Controllers
         {
             try
             {
-                var usuario = await _appAssunto.ExcluirAssunto(codAs);
-                return RetornoRequest(usuario, usuario.ListaErros);
+                var assunto = await _appAssunto.ExcluirAssunto(codAs);
+                return RetornoRequest(assunto, assunto.ListaErros);
             }
             catch (Exception ex)
             {
