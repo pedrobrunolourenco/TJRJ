@@ -6,97 +6,97 @@ namespace TJRJ.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class AssuntoController : BasicController
+    public class AutorController : BasicController
     {
 
-        private IAppAssunto _appAssunto;
+        private IAppAutor _appAutor;
         private ILogger _logger;
 
-        public AssuntoController(IAppAssunto appAssunto,
-                                 ILogger<AssuntoController> logger)
+        public AutorController(IAppAutor appAutor,
+                               ILogger<AutorController> logger)
         {
-            _appAssunto = appAssunto;
+            _appAutor = appAutor;
             _logger = logger;
         }
 
         [HttpGet]
-        [Route("ObterAssuntos")]
-        public async Task<IActionResult> ObterAssuntos()
+        [Route("ObterAutores")]
+        public async Task<IActionResult> ObterAutores()
         {
             try
             {
-                var result = await _appAssunto.ObterAssuntos();
+                var result = await _appAutor.ObterAutores();
                 return RetornoRequest(result);
             }
             catch (Exception ex)
             {
-                _logger.LogError($"ObterAssuntos => {ex.Message}");
+                _logger.LogError($"ObterAutores => {ex.Message}");
                 return BadRequest();
             }
         }
 
         [HttpGet]
-        [Route("ObterAssuntoPorId")]
-        public async Task<IActionResult> ObterAssuntoPorId(int id)
+        [Route("ObterAutorPorId")]
+        public async Task<IActionResult> ObterAutorPorId(int id)
         {
             try
             {
-                var result = await _appAssunto.ObterAssuntoPorId(id);
+                var result = await _appAutor.ObterAutorPorId(id);
                 return RetornoRequest(result);
             }
             catch (Exception ex)
             {
-                _logger.LogError($"ObterAssuntoPorId => {ex.Message}");
+                _logger.LogError($"ObterAutorPorId => {ex.Message}");
                 return BadRequest();
             }
         }
 
 
         [HttpPost]
-        [Route("IncluirAssunto")]
-        public async Task<IActionResult> IncluirAssunto([FromBody] AssuntoModel model)
+        [Route("IncluirAutor")]
+        public async Task<IActionResult> IncluirAutor([FromBody] AutorModel model)
         {
             try
             {
-                var usuario = await _appAssunto.IncluirAssunto(model);
+                var usuario = await _appAutor.IncluirAutor(model);
                 return RetornoRequest(usuario, usuario.ListaErros);
             }
             catch (Exception ex)
             {
-                _logger.LogError($"IncluirAssunto => {ex.Message}");
+                _logger.LogError($"IncluirAutor => {ex.Message}");
                 return BadRequest();
             }
         }
 
         [HttpPut]
-        [Route("AlterarAssunto")]
-        public async Task<IActionResult> AlterarAssunto([FromBody] AssuntoModel model)
+        [Route("AlterarAutor")]
+        public async Task<IActionResult> AlterarAutor([FromBody] AutorModel model)
         {
             try
             {
-                var usuario = await _appAssunto.AlterarAssunto(model);
+                var usuario = await _appAutor.AlterarAutor(model);
                 return RetornoRequest(usuario, usuario.ListaErros);
             }
             catch (Exception ex)
             {
-                _logger.LogError($"AlterarAssunto => {ex.Message}");
+                _logger.LogError($"AlterarAutor => {ex.Message}");
                 return BadRequest();
             }
         }
 
 
         [HttpDelete]
-        [Route("ExcluirAssunto")]
-        public async Task<IActionResult> ExcluirAssunto(int codAs)
+        [Route("ExcluirAutor")]
+        public async Task<IActionResult> ExcluirAutor(int codAu)
         {
             try
             {
-                var usuario = await _appAssunto.ExcluirAssunto(codAs);
+                var usuario = await _appAutor.ExcluirAutor(codAu);
                 return RetornoRequest(usuario, usuario.ListaErros);
             }
             catch (Exception ex)
             {
-                _logger.LogError($"ExcluirAssunto => {ex.Message}");
+                _logger.LogError($"ExcluirAutor => {ex.Message}");
                 return BadRequest();
             }
         }

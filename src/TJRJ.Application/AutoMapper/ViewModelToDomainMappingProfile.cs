@@ -10,6 +10,10 @@ namespace TJRJ.Application.AutoMapper
         {
             CreateMap<AssuntoModel, Assunto>()
                 .ConstructUsing(p => new Assunto(p.CodigoAssunto, p.Descricao));
+
+            CreateMap<AutorModel, Autor>()
+                .ConstructUsing(p => new Autor(p.CodigoAutor, p.Nome));
+
         }
     }
 }

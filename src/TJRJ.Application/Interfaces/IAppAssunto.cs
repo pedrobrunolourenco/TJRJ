@@ -8,7 +8,7 @@ namespace TJRJ.Application.Interfaces
         Task<AssuntoRetornoModel> ObterAssuntoPorId(int id);
         Task<AssuntoRetornoModel> IncluirAssunto(AssuntoModel assunto);
         Task<AssuntoRetornoModel> AlterarAssunto(AssuntoModel assunto);
-        Task<AssuntoRetornoModel> ExcluirAssunto(int CodAs);
+        Task<AssuntoRetornoModel> ExcluirAssunto(int codAs);
 
     }
 }

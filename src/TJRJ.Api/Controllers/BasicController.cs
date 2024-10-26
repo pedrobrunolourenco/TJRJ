@@ -14,10 +14,10 @@ namespace TJRJ.Api.Controllers
                     Data = result
                 });
             }
-            return NotFound(new
+            return Ok(new
             {
                 Sucesso = false,
-                Data = result
+                Data = "Registro não localizado"
             });
 
         }

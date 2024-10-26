@@ -38,11 +38,11 @@ namespace TJRJ.Domain.Services
         }
 
 
-        public async Task<Autor> AlterarAutor(int CodAu, Autor autor)
+        public async Task<Autor> AlterarAutor(Autor autor)
         {
 
             if (!autor.Validar()) return autor;
-            if (!await VerificarSeIdJaExiste(CodAu)) autor.ListaErros.Add($"O ID {CodAu} não foi localizado.");
+            if (!await VerificarSeIdJaExiste(autor.CodAu)) autor.ListaErros.Add($"O ID {autor.CodAu} não foi localizado.");
             var errosDominio = await ValidarRegrasDeDominioNaAlteracao(autor);
             if (errosDominio.ListaErros.Any()) return autor;
             await _unitOfWork.RepositoryAutor.Atualizar(autor);

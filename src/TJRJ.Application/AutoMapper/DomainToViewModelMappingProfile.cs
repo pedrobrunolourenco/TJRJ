@@ -15,6 +15,16 @@ namespace TJRJ.Application.AutoMapper
                     Descricao = src.Descricao
                 }))
                 .ForMember(dest => dest.ListaErros, opt => opt.MapFrom(src => src.ListaErros));
+
+            CreateMap<Autor, AutorRetornoModel>()
+                .ForMember(dest => dest.Autor, opt => opt.MapFrom(src => new AutorModel
+                {
+                    CodigoAutor = src.CodAu,
+                    Nome = src.Nome
+                }))
+                .ForMember(dest => dest.ListaErros, opt => opt.MapFrom(src => src.ListaErros));
+
+
         }
     }
 }

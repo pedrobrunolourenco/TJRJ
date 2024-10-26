@@ -38,9 +38,9 @@ namespace TJRJ.Application.Services
             return _mapper.Map<AssuntoRetornoModel>(await _serviceAssunto.AlterarAssunto(_mapper.Map<Assunto>(assunto)));
         }
 
-        public async Task<AssuntoRetornoModel> ExcluirAssunto(int CodAs)
+        public async Task<AssuntoRetornoModel> ExcluirAssunto(int codAs)
         {
-            return _mapper.Map<AssuntoRetornoModel>(await _serviceAssunto.ExcluirAssunto(CodAs));
+            return _mapper.Map<AssuntoRetornoModel>(await _serviceAssunto.ExcluirAssunto(codAs));
         }
 
 

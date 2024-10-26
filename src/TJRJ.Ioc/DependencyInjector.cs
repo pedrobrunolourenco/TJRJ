@@ -13,10 +13,15 @@ namespace TJRJ.Ioc
     {
         public static void RegisterServices(this IServiceCollection services)
         {
-            // Perfil
+            // Assunto
             services.AddScoped<IAppAssunto, AppAssunto>();
             services.AddScoped<IServiceAssunto, ServiceAssunto>();
             services.AddScoped<IRepositoryAssunto, RepositoryAssunto>();
+
+            // Autor
+            services.AddScoped<IAppAutor, AppAutor>();
+            services.AddScoped<IServiceAutor, ServiceAutor>();
+            services.AddScoped<IRepositoryAutor, RepositoryAutor>();
 
             // outros
             services.AddScoped<IUnitOfWork, UnitOfWork>();
