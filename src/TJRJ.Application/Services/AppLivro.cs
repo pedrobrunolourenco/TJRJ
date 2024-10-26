@@ -32,12 +32,22 @@ namespace TJRJ.Application.Services
 
             var command = new AdicionarLivroCommand(livro.CodI, livro.Titulo, livro.Editora, livro.Edicao, livro.AnoPublicacao, livro.CodigoAssunto, livro.CodigoAutor);
             await _mediatrHandler.EnviarCommand(command);
-
             var livroRetorno = new LivroRetornoModel();
             livroRetorno.Livro = livro;
             livroRetorno.ListaErros = ObterMensagensDeErro();
             return livroRetorno;
         }
+
+        public async Task<LivroRetornoModel> AlterarLivro(LivroModel livro)
+        {
+            var command = new AlterarLivroCommand(livro.CodI, livro.Titulo, livro.Editora, livro.Edicao, livro.AnoPublicacao, livro.CodigoAssunto, livro.CodigoAutor);
+            await _mediatrHandler.EnviarCommand(command);
+            var livroRetorno = new LivroRetornoModel();
+            livroRetorno.Livro = livro;
+            livroRetorno.ListaErros = ObterMensagensDeErro();
+            return livroRetorno;
+        }
+
 
 
         protected bool OperacaoValida()
@@ -54,8 +64,6 @@ namespace TJRJ.Application.Services
         {
             _mediatrHandler.PublicarNotificacao(new DomainNotification(codigo, mensagem));
         }
-
-
 
     }
 }

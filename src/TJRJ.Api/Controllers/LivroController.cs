@@ -36,6 +36,21 @@ namespace TJRJ.Api.Controllers
             }
         }
 
+        [HttpPut]
+        [Route("AlterarLivro")]
+        public async Task<IActionResult> AlterarLivro([FromBody] LivroModel model)
+        {
+            try
+            {
+                var livro = await _appLivro.AlterarLivro(model);
+                return RetornoRequest(livro, livro.ListaErros);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"AlterarLivro => {ex.Message}");
+                return BadRequest();
+            }
+        }
 
     }
 }

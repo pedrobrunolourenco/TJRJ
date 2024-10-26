@@ -16,8 +16,8 @@ namespace TJRJ.Infra.Data
         public DbSet<Livro> Livro { get; set; }
         public DbSet<Assunto> Assunto { get; set; }
         public DbSet<Autor> Autor { get; set; }
-        public DbSet<Livro_Assunto> Livro_Assnuto { get; set; }
-        public DbSet<Livro_Assunto> Livro_Autor { get; set; }
+        public DbSet<Livro_Assunto> Livro_Assunto { get; set; }
+        public DbSet<Livro_Autor> Livro_Autor { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

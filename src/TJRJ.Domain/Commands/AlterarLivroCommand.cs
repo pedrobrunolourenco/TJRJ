@@ -3,7 +3,7 @@ using TJRJ.Domain.Core.Messages;
 
 namespace TJRJ.Domain.Commands
 {
-    public class AdicionarLivroCommand : Command
+    public class AlterarLivroCommand : Command
     {
         public int CodI { get; private set; }
         public string Titulo { get; private set; }
@@ -14,7 +14,7 @@ namespace TJRJ.Domain.Commands
         public int CodigoAutor { get; private set; }
 
 
-        public AdicionarLivroCommand(int codI, string titulo, string editora, int edicao, string anoPublicacao, int codigoAssunto, int codigoAutor)
+        public AlterarLivroCommand(int codI, string titulo, string editora, int edicao, string anoPublicacao, int codigoAssunto, int codigoAutor)
         {
             CodI = codI;
             Titulo = titulo;
@@ -28,16 +28,16 @@ namespace TJRJ.Domain.Commands
 
         public override bool EhValido()
         {
-            ValidationResult = new AdicionarLivroCommandValidation().Validate(this);
+            ValidationResult = new AlterarLivroCommandValidation().Validate(this);
             return ValidationResult.IsValid;
         }
 
     }
 
-    public class AdicionarLivroCommandValidation : AbstractValidator<AdicionarLivroCommand>
+    public class AlterarLivroCommandValidation : AbstractValidator<AlterarLivroCommand>
     {
 
-        public AdicionarLivroCommandValidation()
+        public AlterarLivroCommandValidation()
         {
             RuleFor(t => t.CodI)
                  .GreaterThan(0)
@@ -80,5 +80,4 @@ namespace TJRJ.Domain.Commands
             return false;
         }
     }
-
 }
