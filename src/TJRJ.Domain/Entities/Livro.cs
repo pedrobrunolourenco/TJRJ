@@ -1,8 +1,9 @@
 ﻿using FluentValidation;
+using TJRJ.Domain.Interfaces;
 
 namespace TJRJ.Domain.Entities
 {
-    public class Livro : Entity
+    public class Livro : Entity, IAggregateRoot
     {
         public Livro() { }
 

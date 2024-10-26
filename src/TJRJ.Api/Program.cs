@@ -1,4 +1,5 @@
 using AutoMapper;
+using MediatR;
 using Microsoft.EntityFrameworkCore;
 using TJRJ.Application.AutoMapper;
 using TJRJ.Infra.Data;
@@ -17,6 +18,7 @@ builder.Services.AddDbContext<DataContext>(options =>
 });
 
 builder.Services.AddAutoMapper(typeof(DomainToViewModelMappingProfile), typeof(ViewModelToDomainMappingProfile));
+builder.Services.AddMediatR(typeof(Program));
 builder.Services.RegisterServices();
 
 
