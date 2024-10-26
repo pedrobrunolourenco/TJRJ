@@ -48,6 +48,18 @@ namespace TJRJ.Application.Services
             return livroRetorno;
         }
 
+        public async Task<LivroRetornoModel> ExcluirLivro(int codLivro)
+        {
+            var command = new ExcluirLivroCommand(codLivro);
+            await _mediatrHandler.EnviarCommand(command);
+            var livroRetorno = new LivroRetornoModel();
+            livroRetorno.Livro = new LivroModel
+            {
+                CodI = codLivro,
+            };
+            livroRetorno.ListaErros = ObterMensagensDeErro();
+            return livroRetorno;
+        }
 
 
         protected bool OperacaoValida()

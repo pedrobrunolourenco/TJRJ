@@ -2,7 +2,7 @@
 {
     public class DomainEvent : Event
     {
-        public DomainEvent(Guid aggregateId)
+        public DomainEvent(int aggregateId)
         {
             AggregateId = aggregateId;
         }

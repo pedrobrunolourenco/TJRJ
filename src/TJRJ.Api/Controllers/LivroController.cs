@@ -52,5 +52,22 @@ namespace TJRJ.Api.Controllers
             }
         }
 
+        [HttpDelete]
+        [Route("ExcluirLivro")]
+        public async Task<IActionResult> AlterarLivro(int codLivro)
+        {
+            try
+            {
+                var livro = await _appLivro.ExcluirLivro(codLivro);
+                return RetornoRequest(livro, livro.ListaErros);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"AlterarLivro => {ex.Message}");
+                return BadRequest();
+            }
+        }
+
+
     }
 }

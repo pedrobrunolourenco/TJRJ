@@ -6,6 +6,7 @@ namespace TJRJ.Application.Interfaces
     {
         Task<LivroRetornoModel> IncluirLivro(LivroModel livro);
         Task<LivroRetornoModel> AlterarLivro(LivroModel livro);
+        Task<LivroRetornoModel> ExcluirLivro(int codLivro);
 
     }
 }
