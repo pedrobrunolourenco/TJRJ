@@ -8,6 +8,9 @@ namespace TJRJ.Infra.Data.Repositories
         private readonly DataContext _context;
         private IRepositoryAssunto _repositoryAssunto;
         private IRepositoryAutor _repositoryAutor;
+        private IRepositoryLivro _repositoryLivro;
+        private IRepositoryLivroAutor _repositoryLivroAutor;
+        private IRepositoryLivroAssunto _repositoryLivroAssunto;
 
         public UnitOfWork(DataContext context)
         {
@@ -23,6 +26,22 @@ namespace TJRJ.Infra.Data.Repositories
         {
             get { return _repositoryAutor ??= new RepositoryAutor(_context); }
         }
+
+        public IRepositoryLivro RepositoryLivro
+        {
+            get { return _repositoryLivro ??= new RepositoryLivro(_context); }
+        }
+
+        public IRepositoryLivroAutor RepositoryLivroAutor
+        {
+            get { return _repositoryLivroAutor ??= new RepositoryLivroAutor(_context); }
+        }
+
+        public IRepositoryLivroAssunto RepositoryLivroAssunto
+        {
+            get { return _repositoryLivroAssunto ??= new RepositoryLivroAssunto(_context); }
+        }
+
 
 
         public async Task Commit()
