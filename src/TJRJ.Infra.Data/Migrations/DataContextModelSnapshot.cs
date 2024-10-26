@@ -24,10 +24,7 @@ namespace TJRJ.Infra.Data.Migrations
             modelBuilder.Entity("TJRJ.Domain.Entities.Assunto", b =>
                 {
                     b.Property<int>("CodAs")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CodAs"));
 
                     b.Property<string>("Descricao")
                         .IsRequired()
@@ -42,10 +39,7 @@ namespace TJRJ.Infra.Data.Migrations
             modelBuilder.Entity("TJRJ.Domain.Entities.Autor", b =>
                 {
                     b.Property<int>("CodAu")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CodAu"));
 
                     b.Property<string>("Nome")
                         .IsRequired()
@@ -60,10 +54,7 @@ namespace TJRJ.Infra.Data.Migrations
             modelBuilder.Entity("TJRJ.Domain.Entities.Livro", b =>
                 {
                     b.Property<int>("CodI")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CodI"));
 
                     b.Property<string>("AnoPublicacao")
                         .IsRequired()

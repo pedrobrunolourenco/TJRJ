@@ -9,6 +9,12 @@ namespace TJRJ.Infra.Data.Mappings
         public void Configure(EntityTypeBuilder<Livro> builder)
         {
             builder.HasKey(l => new { l.CodI });
+
+            builder.Property(l => l.CodI)
+                   .ValueGeneratedNever()
+                   .IsRequired()
+                   .HasColumnType("int");
+
             builder.Property(l => l.Titulo).IsRequired().HasColumnType("varchar").HasMaxLength(40);
             builder.Property(l => l.Editora).IsRequired().HasColumnType("varchar").HasMaxLength(40);
             builder.Property(l => l.Edicao).IsRequired().HasColumnType("int");

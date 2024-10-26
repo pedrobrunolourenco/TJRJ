@@ -11,10 +11,12 @@ namespace TJRJ.Infra.Data.Mappings
             builder.HasKey(l => new { l.Livro_CodI, l.Assunto_CodAs });
 
             builder.Property(l => l.Livro_CodI)
+                   .ValueGeneratedNever()
                    .IsRequired()
                    .HasColumnType("int");
 
             builder.Property(l => l.Assunto_CodAs)
+                   .ValueGeneratedNever()
                    .IsRequired()
                    .HasColumnType("int");
 

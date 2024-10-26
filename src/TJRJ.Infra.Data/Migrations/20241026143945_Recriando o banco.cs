@@ -5,7 +5,7 @@
 namespace TJRJ.Infra.Data.Migrations
 {
     /// <inheritdoc />
-    public partial class Inicio : Migration
+    public partial class Recriandoobanco : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -14,8 +14,7 @@ namespace TJRJ.Infra.Data.Migrations
                 name: "Assunto",
                 columns: table => new
                 {
-                    CodAs = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    CodAs = table.Column<int>(type: "int", nullable: false),
                     Descricao = table.Column<string>(type: "varchar(20)", maxLength: 20, nullable: false)
                 },
                 constraints: table =>
@@ -27,8 +26,7 @@ namespace TJRJ.Infra.Data.Migrations
                 name: "Autor",
                 columns: table => new
                 {
-                    CodAu = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    CodAu = table.Column<int>(type: "int", nullable: false),
                     Nome = table.Column<string>(type: "varchar(40)", maxLength: 40, nullable: false)
                 },
                 constraints: table =>
@@ -40,8 +38,7 @@ namespace TJRJ.Infra.Data.Migrations
                 name: "Livro",
                 columns: table => new
                 {
-                    CodI = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    CodI = table.Column<int>(type: "int", nullable: false),
                     Titulo = table.Column<string>(type: "varchar(40)", maxLength: 40, nullable: false),
                     Editora = table.Column<string>(type: "varchar(40)", maxLength: 40, nullable: false),
                     Edicao = table.Column<int>(type: "int", nullable: false),

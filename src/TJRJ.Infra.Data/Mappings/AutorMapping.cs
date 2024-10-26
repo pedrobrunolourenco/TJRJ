@@ -12,6 +12,7 @@ namespace TJRJ.Infra.Data.Mappings
 
             builder.Property(a => a.CodAu )
                    .IsRequired()
+                   .ValueGeneratedNever()
                    .HasColumnType("int");
 
             builder.Property(a => a.Nome).IsRequired().HasColumnType("varchar").HasMaxLength(40);
