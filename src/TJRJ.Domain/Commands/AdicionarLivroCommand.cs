@@ -10,19 +10,15 @@ namespace TJRJ.Domain.Commands
         public string Editora { get; private set; }
         public int Edicao { get; private set; }
         public string AnoPublicacao { get; private set; }
-        public int CodigoAssunto { get; private set; }
-        public int CodigoAutor { get; private set; }
+ 
 
-
-        public AdicionarLivroCommand(int codI, string titulo, string editora, int edicao, string anoPublicacao, int codigoAssunto, int codigoAutor)
+        public AdicionarLivroCommand(int codI, string titulo, string editora, int edicao, string anoPublicacao)
         {
             CodI = codI;
             Titulo = titulo;
             Editora = editora;
             Edicao = edicao;
             AnoPublicacao = anoPublicacao;
-            CodigoAssunto = codigoAssunto;
-            CodigoAutor = codigoAutor;
             AggregateId = codI;
         }
 
@@ -59,16 +55,6 @@ namespace TJRJ.Domain.Commands
                 .NotEmpty().WithMessage("Ano de publicação é obrigatório.")
                 .Matches(@"^\d{4}$").WithMessage("Ano de publicação deve conter exatamente 4 dígitos.")
                 .Must(ValidaAnoPublicacao).WithMessage("Ano de publicação não pode ser maior que o ano corrente.");
-
-            RuleFor(t => t.CodigoAssunto)
-                .GreaterThan(0)
-                .WithMessage("O código do assunto deve ser maior que zero.");
-
-            RuleFor(t => t.CodigoAutor)
-                .GreaterThan(0)
-                .WithMessage("O código do autor deve ser maior que zero.");
-
-
         }
 
         private bool ValidaAnoPublicacao(string ano)

@@ -19,6 +19,9 @@ import { AssuntoFormAlteracaoComponent } from './pages/assunto-form-alteracao/as
 import { AutorFormAlteracaoComponent } from './pages/autor-form-alteracao/autor-form-alteracao.component';
 import { AutorFormInclusaoComponent } from './pages/autor-form-inclusao/autor-form-inclusao.component';
 import { AutorListComponent } from './pages/autor-list/autor-list.component';
+import { LivroListComponent } from './pages/livro-list/livro-list.component';
+import { LivroFormInclusaoComponent } from './pages/livro-form-inclusao/livro-form-inclusao.component';
+import { LivroFormAlteracaoComponent } from './pages/livro-form-alteracao/livro-form-alteracao.component';
 
 
 @NgModule({
@@ -34,6 +37,9 @@ import { AutorListComponent } from './pages/autor-list/autor-list.component';
     AutorFormAlteracaoComponent,
     AutorFormInclusaoComponent,
     AutorListComponent,
+    LivroListComponent,
+    LivroFormInclusaoComponent,
+    LivroFormAlteracaoComponent,
   ],
   imports: [
     BrowserModule,

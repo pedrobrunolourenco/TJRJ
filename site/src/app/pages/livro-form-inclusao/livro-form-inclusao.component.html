@@ -1,0 +1,43 @@
+<div class="container mt-4">
+  <h4 class="mb-4">Inclusão de Livro</h4>
+
+  <form (ngSubmit)="gravarLivro()" #tituloForm="ngForm" autocomplete="off">
+    <div class="mb-3">
+      <label for="codigoLivro" class="col-sm-2 col-form-label">Código do Livro</label>
+      <div class="col-sm-2">
+        <input type="number" id="codigoLivro" class="form-control" [(ngModel)]="livro.CodI"  autocomplete="off" name="codigoLivro" required>
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="tituloLivro" class="col-sm-2 col-form-label">Título do Livro</label>
+      <div class="col-sm-6">
+        <input type="text" id="tituloLivro" class="form-control" [(ngModel)]="livro.Titulo" autocomplete="off" name="titulo" required>
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="editoraLivro" class="col-sm-2 col-form-label">Editora</label>
+      <div class="col-sm-6">
+        <input type="text" id="editoraLivro" class="form-control" [(ngModel)]="livro.Editora" autocomplete="off" name="editora" required>
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="edicaoLivro" class="col-sm-2 col-form-label">Edicao</label>
+      <div class="col-sm-2">
+        <input type="text" id="edicaoLivro" class="form-control" [(ngModel)]="livro.Edicao" autocomplete="off" name="edicao" required>
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="anoPublicacaoLivro" class="col-sm-2 col-form-label">Ano de Publicação</label>
+      <div class="col-sm-2">
+        <input type="text" id="anoPublicacaoLivro" class="form-control" [(ngModel)]="livro.AnoPublicacao" autocomplete="off" name="anopublicacao" required>
+      </div>
+    </div>
+
+
+    <button type="submit" class="btn btn-primary" [disabled]="!tituloForm.form.valid">Gravar</button>
+  </form>
+</div>

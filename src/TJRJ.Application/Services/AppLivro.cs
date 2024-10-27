@@ -54,7 +54,7 @@ namespace TJRJ.Application.Services
         public async Task<LivroRetornoModel> IncluirLivro(LivroModel livro)
         {
 
-            var command = new AdicionarLivroCommand(livro.CodI, livro.Titulo, livro.Editora, livro.Edicao, livro.AnoPublicacao, livro.CodigoAssunto, livro.CodigoAutor);
+            var command = new AdicionarLivroCommand(livro.CodI, livro.Titulo, livro.Editora, livro.Edicao, livro.AnoPublicacao);
             await _mediatrHandler.EnviarCommand(command);
             var livroRetorno = new LivroRetornoModel();
             livroRetorno.Livro = livro;
@@ -73,7 +73,7 @@ namespace TJRJ.Application.Services
         }
         public async Task<LivroRetornoModel> AlterarLivro(LivroAlteracaoModel livro)
         {
-            var command = new AlterarLivroCommand(livro.CodI, livro.Titulo, livro.Editora, livro.Edicao, livro.AnoPublicacao, livro.CodigoAssunto);
+            var command = new AlterarLivroCommand(livro.CodI, livro.Titulo, livro.Editora, livro.Edicao, livro.AnoPublicacao);
             await _mediatrHandler.EnviarCommand(command);
             var livroRetorno = new LivroRetornoModel();
             livroRetorno.Livro = new LivroModel

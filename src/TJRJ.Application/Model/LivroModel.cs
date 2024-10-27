@@ -7,8 +7,6 @@
         public string Editora { get; set; }
         public int Edicao { get; set; }
         public string AnoPublicacao { get; set; }
-        public int CodigoAssunto { get; set; }
-        public int CodigoAutor { get; set; }
 
     }
 }

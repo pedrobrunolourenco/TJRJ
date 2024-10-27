@@ -7,6 +7,9 @@ import { AssuntoFormAlteracaoComponent } from './pages/assunto-form-alteracao/as
 import { AutorListComponent } from './pages/autor-list/autor-list.component';
 import { AutorFormInclusaoComponent } from './pages/autor-form-inclusao/autor-form-inclusao.component';
 import { AutorFormAlteracaoComponent } from './pages/autor-form-alteracao/autor-form-alteracao.component';
+import { LivroListComponent } from './pages/livro-list/livro-list.component';
+import { LivroFormInclusaoComponent } from './pages/livro-form-inclusao/livro-form-inclusao.component';
+import { LivroFormAlteracaoComponent } from './pages/livro-form-alteracao/livro-form-alteracao.component';
 
 
 const routes: Routes = [
@@ -18,6 +21,9 @@ const routes: Routes = [
   {path: 'autor/list', component: AutorListComponent },
   {path: 'autor/novo', component: AutorFormInclusaoComponent },
   {path: 'autor/editar', component: AutorFormAlteracaoComponent },
+  {path: 'livro/list', component: LivroListComponent },
+  {path: 'livro/novo', component: LivroFormInclusaoComponent },
+  {path: 'livro/editar', component: LivroFormAlteracaoComponent },
 ];
 
 @NgModule({

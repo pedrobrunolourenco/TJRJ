@@ -30,7 +30,6 @@ export class AutorFormAlteracaoComponent {
       const autorParam = params.get('autor');
       if (autorParam) {
         var json = JSON.parse(autorParam);
-        console.log(json);
         this.autor.CodigoAutor = json.autor.codigoAutor;
         this.autor.Nome = json.autor.nome;
       }

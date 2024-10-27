@@ -13,6 +13,5 @@ namespace TJRJ.Application.Model
         public string Editora { get; set; }
         public int Edicao { get; set; }
         public string AnoPublicacao { get; set; }
-        public int CodigoAssunto { get; set; }
     }
 }
