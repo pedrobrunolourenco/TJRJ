@@ -7,6 +7,13 @@ using TJRJ.Ioc;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowSpecificOrigin",
+        builder => builder.WithOrigins("http://localhost:4200", "https://localhost:4200")
+                          .AllowAnyMethod()
+                          .AllowAnyHeader());
+});
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
@@ -21,8 +28,6 @@ builder.Services.AddAutoMapper(typeof(DomainToViewModelMappingProfile), typeof(V
 builder.Services.AddMediatR(typeof(Program));
 builder.Services.RegisterServices();
 
-
-
 var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
@@ -32,6 +37,9 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+// Adicione o CORS antes da autorização e mapeamento de controladores
+app.UseCors("AllowSpecificOrigin");
 
 app.UseAuthorization();
 

@@ -13,6 +13,9 @@ import { NgxSpinnerModule } from 'ngx-spinner';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { BaseUiComponent } from './_components/base-ui/base-ui.component';
 import { LoadInterceptor } from './_interceptors/loading.interceptor';
+import { AssuntoListComponent } from './pages/assunto-list/assunto-list.component';
+import { AssuntoFormInclusaoComponent } from './pages/assunto-form-inclusao/assunto-form-inclusao.component';
+import { AssuntoFormAlteracaoComponent } from './pages/assunto-form-alteracao/assunto-form-alteracao.component';
 
 
 @NgModule({
@@ -22,6 +25,9 @@ import { LoadInterceptor } from './_interceptors/loading.interceptor';
     FooterComponent,
     NavbarComponent,
     BaseUiComponent,
+    AssuntoListComponent,
+    AssuntoFormInclusaoComponent,
+    AssuntoFormAlteracaoComponent,
   ],
   imports: [
     BrowserModule,

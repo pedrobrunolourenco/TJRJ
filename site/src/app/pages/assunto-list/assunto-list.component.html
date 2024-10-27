@@ -1,0 +1,34 @@
+<div class="container mt-4">
+  <h4 class="mb-3">Assuntos</h4>
+
+  <div class="d-flex justify-content-end mb-3">
+    <button class="btn btn-primary" routerLink="/assunto/novo">Novo Assunto</button>
+  </div>
+
+  <table class="table table-bordered table-hover">
+    <thead class="table-light">
+      <tr>
+        <th class="text-center col-icon"></th>
+        <th class="text-center col-icon"></th>
+        <th class="col-code">Código</th>
+        <th class="col-description">Descrição</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let assunto of assuntos">
+        <td class="text-center">
+          <button class="btn btn-success" (click)="editarAssunto(assunto)">
+            <i class="bi bi-pencil-fill"></i>
+          </button>
+        </td>
+        <td class="text-center">
+          <button class="btn btn-danger" (click)="excluirAssunto(assunto)">
+            <i class="bi bi-trash-fill"></i>
+          </button>
+        </td>
+        <td>{{ assunto.assunto.codigoAssunto }}</td>
+        <td>{{ assunto.assunto.descricao }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
