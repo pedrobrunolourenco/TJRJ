@@ -5,6 +5,8 @@ using TJRJ.Application.Model;
 using TJRJ.Domain.Commands;
 using TJRJ.Domain.Core.Mediator;
 using TJRJ.Domain.Core.Messages.CommonMessages;
+using TJRJ.Domain.DTOs;
+using TJRJ.Domain.Queries;
 
 namespace TJRJ.Application.Services
 {
@@ -15,17 +17,23 @@ namespace TJRJ.Application.Services
 
         private readonly IMapper _mapper;
         private readonly IMediatrHandler _mediatrHandler;
-
+        private readonly ILivroQuery _livroQuery;
         public AppLivro(IMapper mapper,
                  INotificationHandler<DomainNotification> notifications,
-                 IMediatrHandler mediatrHandler)
+                 IMediatrHandler mediatrHandler,
+                 ILivroQuery livroQuery)
         {
             _mapper = mapper;
             _notifications = (DomainNotificationHandler)notifications;
             _mediatrHandler = mediatrHandler;
+            _livroQuery = livroQuery;
         }
 
 
+        public async Task<IEnumerable<LivroDto>> ObterTodosOsLivros()
+        {
+            return await _livroQuery.ObterTodosOsLivros();
+        }
 
         public async Task<LivroRetornoModel> IncluirLivro(LivroModel livro)
         {

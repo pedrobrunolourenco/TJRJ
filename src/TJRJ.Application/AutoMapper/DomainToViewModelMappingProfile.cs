@@ -23,8 +23,6 @@ namespace TJRJ.Application.AutoMapper
                     Nome = src.Nome
                 }))
                 .ForMember(dest => dest.ListaErros, opt => opt.MapFrom(src => src.ListaErros));
-
-
         }
     }
 }

@@ -7,6 +7,7 @@ using TJRJ.Domain.Core.Mediator;
 using TJRJ.Domain.Core.Messages.CommonMessages;
 using TJRJ.Domain.Interfaces.Repository;
 using TJRJ.Domain.Interfaces.Service;
+using TJRJ.Domain.Queries;
 using TJRJ.Domain.Services;
 using TJRJ.Infra.Data;
 using TJRJ.Infra.Data.Repositories;
@@ -41,6 +42,8 @@ namespace TJRJ.Ioc
             services.AddScoped<IRepositoryLivro, RepositoryLivro>();
             services.AddScoped<IRepositoryLivroAutor, RepositoryLivroAutor>();
             services.AddScoped<IRepositoryLivroAssunto, RepositoryLivroAssunto>();
+            services.AddScoped<ILivroQuery, LivroQuery>();
+
 
             // outros
             services.AddScoped<IUnitOfWork, UnitOfWork>();

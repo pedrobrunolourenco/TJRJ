@@ -20,6 +20,23 @@ namespace TJRJ.Api.Controllers
             _logger = logger;
         }
 
+        [HttpGet]
+        [Route("ObterLivros")]
+        public async Task<IActionResult> ObterLivros()
+        {
+            try
+            {
+                var livros = await _appLivro.ObterTodosOsLivros();
+                return RetornoRequest(livros);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"ObterLivros => {ex.Message}");
+                return BadRequest();
+            }
+        }
+
+
         [HttpPost]
         [Route("IncluirLivro")]
         public async Task<IActionResult> IncluirLivro([FromBody] LivroModel model)
