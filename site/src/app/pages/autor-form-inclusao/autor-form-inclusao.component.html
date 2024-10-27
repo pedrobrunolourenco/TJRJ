@@ -1,0 +1,21 @@
+<div class="container mt-4">
+  <h4 class="mb-4">Inclusão de Autor</h4>
+
+  <form (ngSubmit)="gravarAutor()" #autorForm="ngForm" autocomplete="off">
+    <div class="mb-3">
+      <label for="codigoAutor" class="col-sm-2 col-form-label">Código do Autor</label>
+      <div class="col-sm-2">
+        <input type="number" id="codigoAutor" class="form-control" [(ngModel)]="autor.CodigoAutor"  autocomplete="off" name="codigoAutor" required>
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="nomeAutor" class="col-sm-2 col-form-label">Nome do Autor</label>
+      <div class="col-sm-6">
+        <input type="text" id="nomeAutor" class="form-control" [(ngModel)]="autor.Nome" autocomplete="off" name="nome" required>
+      </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary" [disabled]="!autorForm.form.valid">Gravar</button>
+  </form>
+</div>

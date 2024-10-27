@@ -16,6 +16,9 @@ import { LoadInterceptor } from './_interceptors/loading.interceptor';
 import { AssuntoListComponent } from './pages/assunto-list/assunto-list.component';
 import { AssuntoFormInclusaoComponent } from './pages/assunto-form-inclusao/assunto-form-inclusao.component';
 import { AssuntoFormAlteracaoComponent } from './pages/assunto-form-alteracao/assunto-form-alteracao.component';
+import { AutorFormAlteracaoComponent } from './pages/autor-form-alteracao/autor-form-alteracao.component';
+import { AutorFormInclusaoComponent } from './pages/autor-form-inclusao/autor-form-inclusao.component';
+import { AutorListComponent } from './pages/autor-list/autor-list.component';
 
 
 @NgModule({
@@ -28,6 +31,9 @@ import { AssuntoFormAlteracaoComponent } from './pages/assunto-form-alteracao/as
     AssuntoListComponent,
     AssuntoFormInclusaoComponent,
     AssuntoFormAlteracaoComponent,
+    AutorFormAlteracaoComponent,
+    AutorFormInclusaoComponent,
+    AutorListComponent,
   ],
   imports: [
     BrowserModule,

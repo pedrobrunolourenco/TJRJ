@@ -3,20 +3,20 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { map } from 'rxjs';
 import { environment } from '../environments/environment';
 import { ResultModel } from '../_models/result.model';
-import { Assunto } from '../_models/assunto.model';
+import { Autor } from '../_models/autor.model';
 
 @Injectable({
   providedIn: 'root'
 })
-export class AssuntoService {
+export class AutorService {
 
   constructor(private http: HttpClient) { }
 
   baseUrl: string = environment.apiUrl;
 
 
-  listarAssuntos(){
-    return this.http.get<ResultModel>(this.baseUrl + 'Assunto/ObterAssuntos').pipe(
+  listarAutores(){
+    return this.http.get<ResultModel>(this.baseUrl + 'Autor/ObterAutores').pipe(
       map( (response: ResultModel) => {
         return response;
       })
@@ -24,33 +24,32 @@ export class AssuntoService {
   }
 
 
-  obterAssuntoPorId(id: number) {
-    return this.http.get<ResultModel>(`${this.baseUrl}Assunto/ObterAssuntoPorId?id=${id}`).pipe(
+  obterAutorPorId(id: number) {
+    return this.http.get<ResultModel>(`${this.baseUrl}Autor/ObterAutorPorId?id=${id}`).pipe(
       map((response: ResultModel) => {
         return response;
       })
     );
   }
 
-  incluirAssunto(assunto: Assunto){
-    return this.http.post<ResultModel>(this.baseUrl + 'Assunto/IncluirAssunto', assunto ).pipe(
+  incluirAutor(autor: Autor){
+    return this.http.post<ResultModel>(this.baseUrl + 'Autor/IncluirAutor', autor ).pipe(
       map( (response: ResultModel) => {
         return response;
       })
     );
   }
 
-  alterarAssunto(assunto: Assunto){
-    return this.http.put<ResultModel>(this.baseUrl + 'Assunto/AlterarAssunto', assunto ).pipe(
+  alterarAutor(autor: Autor){
+    return this.http.put<ResultModel>(this.baseUrl + 'Autor/AlterarAutor', autor ).pipe(
       map( (response: ResultModel) => {
         return response;
       })
     );
   }
 
-  excluirAssunto(id: number) {
-    console.log("IDDDDDDD",id)
-    return this.http.delete<ResultModel>(`${this.baseUrl}Assunto/ExcluirAssunto?codAs=${id}`).pipe(
+  excluirAutor(id: number) {
+    return this.http.delete<ResultModel>(`${this.baseUrl}Autor/ExcluirAutor?codAu=${id}`).pipe(
       map((response: ResultModel) => {
         return response;
       })

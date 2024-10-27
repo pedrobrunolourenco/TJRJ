@@ -1,0 +1,52 @@
+<div class="container mt-4">
+  <h4 class="mb-3">Autores</h4>
+
+  <div class="d-flex justify-content-end mb-3">
+    <button class="btn btn-primary" routerLink="/autor/novo">Novo Autor</button>
+  </div>
+
+  <table class="table table-bordered table-hover">
+    <thead class="table-light">
+      <tr>
+        <th class="text-center col-icon"></th>
+        <th class="text-center col-icon"></th>
+        <th class="col-code">Código</th>
+        <th class="col-description">Nome</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let autor of autores">
+        <td class="text-center">
+          <button class="btn btn-success" (click)="editarAutor(autor)">
+            <i class="bi bi-pencil-fill"></i>
+          </button>
+        </td>
+        <td class="text-center">
+          <button class="btn btn-danger" (click)="setAutorParaExcluir(autor)" data-bs-toggle="modal" data-bs-target="#confirmDeleteModal">
+            <i class="bi bi-trash-fill"></i>
+          </button>
+        </td>
+        <td>{{ autor.autor.codigoAutor }}</td>
+        <td>{{ autor.autor.nome }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="modal fade" id="confirmDeleteModal" tabindex="-1" aria-labelledby="confirmDeleteModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="confirmDeleteModalLabel">Confirmação de Exclusão</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        Você tem certeza de que deseja excluir este autor?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-danger" (click)="confirmarExclusao()">Excluir</button>
+      </div>
+    </div>
+  </div>
+</div>

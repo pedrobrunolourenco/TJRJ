@@ -1,47 +1,47 @@
-import { Component, OnInit } from '@angular/core';
-import { ToastrService } from 'ngx-toastr';
-import { AssuntoService } from '../../_services/assunto.service';
-import { ResultModel } from '../../_models/result.model';
+import { Component } from '@angular/core';
+import { AutorService } from '../../_services/autor.service';
 import { Router } from '@angular/router';
-import { Assunto } from '../../_models/assunto.model';
+import { ToastrService } from 'ngx-toastr';
+import { ResultModel } from '../../_models/result.model';
+import { Autor } from '../../_models/autor.model';
 import * as bootstrap from 'bootstrap';
 
 @Component({
-  selector: 'app-assunto-list',
-  templateUrl: './assunto-list.component.html',
-  styleUrls: ['./assunto-list.component.css']
+  selector: 'app-autor-list',
+  templateUrl: './autor-list.component.html',
+  styleUrl: './autor-list.component.css'
 })
-export class AssuntoListComponent implements OnInit {
+export class AutorListComponent {
 
-  assuntoParaExcluir: any;
-  assuntos: any;
+  autorParaExcluir: any;
+  autores: any;
   modalInstance: any;
 
   constructor(
-    private assuntoService: AssuntoService,
+    private autorService: AutorService,
     private router: Router,
     private toastr: ToastrService
   ) {}
 
   ngOnInit(): void {
-    this.assuntoService.listarAssuntos().subscribe((response: ResultModel) => {
+    this.autorService.listarAutores().subscribe((response: ResultModel) => {
       if (response.sucesso) {
-        this.assuntos = response.data;
+        this.autores = response.data;
       }
     }, () => {
       this.toastr.error("Erro ao listar autores");
     });
   }
 
-  editarAssunto(assunto: Assunto) {
-    this.router.navigate(['/assunto/editar', { assunto: JSON.stringify(assunto) }]);
+  editarAutor(autor: Autor) {
+    this.router.navigate(['/autor/editar', { autor: JSON.stringify(autor) }]);
   }
 
-  setAssuntoParaExcluir(assunto: any) {
-    this.assuntoParaExcluir = assunto;
+  setAutorParaExcluir(autor: any) {
+    this.autorParaExcluir = autor;
     const modalElement = document.getElementById('confirmDeleteModal');
 
-    if (modalElement) {  // Verifica se o modalElement existe
+    if (modalElement) {
       this.modalInstance = new bootstrap.Modal(modalElement, { backdrop: 'static' });
       this.modalInstance.show();
 
@@ -60,18 +60,18 @@ export class AssuntoListComponent implements OnInit {
   }
 
   confirmarExclusao() {
-    this.excluirAssunto(this.assuntoParaExcluir);
+    this.excluirAutor(this.autorParaExcluir);
     this.fecharModal();
   }
 
-  excluirAssunto(assunto: any) {
-    this.assuntoService.excluirAssunto(assunto.assunto.codigoAssunto).subscribe((response: ResultModel) => {
+  excluirAutor(autor: any) {
+    this.autorService.excluirAutor(autor.autor.codigoAutor).subscribe((response: ResultModel) => {
       if (response.sucesso) {
-        this.toastr.success("Assunto Excluído com sucesso");
+        this.toastr.success("Autor Excluído com sucesso");
         this.ngOnInit();
       }
     }, () => {
-      this.toastr.error("Erro ao excluir assunto");
+      this.toastr.error("Erro ao excluir autor");
     });
     this.fecharModal();
   }
@@ -79,4 +79,7 @@ export class AssuntoListComponent implements OnInit {
   private removeBackdrop() {
     document.querySelectorAll('.modal-backdrop').forEach(backdrop => backdrop.remove());
   }
+
 }
+
+
