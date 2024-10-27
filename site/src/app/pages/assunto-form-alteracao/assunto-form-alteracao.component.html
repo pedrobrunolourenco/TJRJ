@@ -1,1 +1,26 @@
-<p>assunto-form-alteracao works!</p>
+<div class="container mt-4">
+  <h4 class="mb-4">Alteração de Assunto</h4>
+
+
+  <form (ngSubmit)="gravarAssunto()" #assuntoForm="ngForm" autocomplete="off">
+
+
+    <div class="mb-3">
+      <label for="codigoAssunto" class="col-sm-2 col-form-label">Código do Assunto</label>
+      <div class="col-sm-2">
+        <input type="number" id="codigoAssunto" class="form-control" [(ngModel)]="assunto.CodigoAssunto"  autocomplete="off" name="codigoAssunto" required  readonly>
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="descricaoAssunto" class="col-sm-2 col-form-label">Descrição do Assunto</label>
+      <div class="col-sm-6">
+        <input type="text" id="descricaoAssunto" class="form-control" [(ngModel)]="assunto.Descricao" autocomplete="off" name="descricao" required>
+      </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary" [disabled]="!assuntoForm.form.valid">Gravar</button>
+  </form>
+</div>
+
+

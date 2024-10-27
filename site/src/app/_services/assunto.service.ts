@@ -10,14 +10,35 @@ import { Assunto } from '../_models/assunto.model';
 })
 export class AssuntoService {
 
+  constructor(private http: HttpClient) { }
+
   baseUrl: string = environment.apiUrl;
 
 
-  constructor(private http: HttpClient) { }
+  private _assunto: Assunto | null = null;
+
+  set assunto(value: Assunto) {
+    this._assunto = value;
+  }
+
+  get assunto(): Assunto | null {
+    return this._assunto;
+  }
+
+
 
   listarAssuntos(){
     return this.http.get<ResultModel>(this.baseUrl + 'Assunto/ObterAssuntos').pipe(
       map( (response: ResultModel) => {
+        return response;
+      })
+    );
+  }
+
+
+  obterAssuntoPorId(id: number) {
+    return this.http.get<ResultModel>(`${this.baseUrl}Assunto/ObterAssuntoPorId?id=${id}`).pipe(
+      map((response: ResultModel) => {
         return response;
       })
     );
@@ -31,6 +52,22 @@ export class AssuntoService {
     );
   }
 
+  alterarAssunto(assunto: Assunto){
+    return this.http.put<ResultModel>(this.baseUrl + 'Assunto/AlterarAssunto', assunto ).pipe(
+      map( (response: ResultModel) => {
+        return response;
+      })
+    );
+  }
+
+  excluirAssunto(id: number) {
+    console.log("IDDDDDDD",id)
+    return this.http.delete<ResultModel>(`${this.baseUrl}Assunto/ExcluirAssunto?codAs=${id}`).pipe(
+      map((response: ResultModel) => {
+        return response;
+      })
+    );
+  }
 
 
 }

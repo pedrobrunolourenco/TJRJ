@@ -19,6 +19,7 @@
     "@angular/platform-browser-dynamic": "^18.2.0",
     "@angular/router": "^18.2.0",
     "bootstrap": "^5.3.3",
+    "ngx-bootstrap": "^18.1.2",
     "ngx-echarts": "^18.0.0",
     "ngx-spinner": "^17.0.0",
     "ngx-toaster": "^1.0.1",
