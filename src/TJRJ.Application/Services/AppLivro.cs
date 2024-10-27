@@ -62,12 +62,19 @@ namespace TJRJ.Application.Services
             livroAutorRetorno.ListaErros = ObterMensagensDeErro();
             return livroAutorRetorno;
         }
-        public async Task<LivroRetornoModel> AlterarLivro(LivroModel livro)
+        public async Task<LivroRetornoModel> AlterarLivro(LivroAlteracaoModel livro)
         {
-            var command = new AlterarLivroCommand(livro.CodI, livro.Titulo, livro.Editora, livro.Edicao, livro.AnoPublicacao, livro.CodigoAssunto, livro.CodigoAutor);
+            var command = new AlterarLivroCommand(livro.CodI, livro.Titulo, livro.Editora, livro.Edicao, livro.AnoPublicacao, livro.CodigoAssunto);
             await _mediatrHandler.EnviarCommand(command);
             var livroRetorno = new LivroRetornoModel();
-            livroRetorno.Livro = livro;
+            livroRetorno.Livro = new LivroModel
+            {
+                CodI = livro.CodI,
+                Titulo = livro.Titulo,
+                Editora = livro.Editora,
+                Edicao = livro.Edicao,
+                AnoPublicacao = livro.AnoPublicacao
+            };
             livroRetorno.ListaErros = ObterMensagensDeErro();
             return livroRetorno;
         }

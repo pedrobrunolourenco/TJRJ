@@ -87,7 +87,7 @@ namespace TJRJ.Api.Controllers
 
         [HttpPut]
         [Route("AlterarLivro")]
-        public async Task<IActionResult> AlterarLivro([FromBody] LivroModel model)
+        public async Task<IActionResult> AlterarLivro([FromBody] LivroAlteracaoModel model)
         {
             try
             {

@@ -11,10 +11,9 @@ namespace TJRJ.Domain.Commands
         public int Edicao { get; private set; }
         public string AnoPublicacao { get; private set; }
         public int CodigoAssunto { get; private set; }
-        public int CodigoAutor { get; private set; }
 
 
-        public AlterarLivroCommand(int codI, string titulo, string editora, int edicao, string anoPublicacao, int codigoAssunto, int codigoAutor)
+        public AlterarLivroCommand(int codI, string titulo, string editora, int edicao, string anoPublicacao, int codigoAssunto)
         {
             CodI = codI;
             Titulo = titulo;
@@ -22,7 +21,6 @@ namespace TJRJ.Domain.Commands
             Edicao = edicao;
             AnoPublicacao = anoPublicacao;
             CodigoAssunto = codigoAssunto;
-            CodigoAutor = codigoAutor;
             AggregateId = codI;
         }
 
@@ -63,11 +61,6 @@ namespace TJRJ.Domain.Commands
             RuleFor(t => t.CodigoAssunto)
                 .GreaterThan(0)
                 .WithMessage("O código do assunto deve ser maior que zero.");
-
-            RuleFor(t => t.CodigoAutor)
-                .GreaterThan(0)
-                .WithMessage("O código do autor deve ser maior que zero.");
-
 
         }
 
