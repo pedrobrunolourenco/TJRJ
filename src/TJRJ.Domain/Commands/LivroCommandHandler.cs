@@ -11,7 +11,8 @@ namespace TJRJ.Domain.Commands
         IRequestHandler<AdicionarLivroCommand, bool>,
         IRequestHandler<AlterarLivroCommand, bool>,
         IRequestHandler<ExcluirLivroCommand, bool>,
-        IRequestHandler<AdicionarAutorCommand, bool>
+        IRequestHandler<AdicionarAutorCommand, bool>,
+        IRequestHandler<AdicionarAssuntoCommand, bool>
     {
 
         private readonly IMediatrHandler _mediatorHandler;
@@ -59,6 +60,17 @@ namespace TJRJ.Domain.Commands
             var livro_autor = new Livro_Autor(message.Livro_CodI, message.Autor_CodAu);
             await _unitOfWork.RepositoryLivroAutor.Remover(livro_autor);
             await _unitOfWork.RepositoryLivroAutor.Adicionar(livro_autor);
+            await _unitOfWork.Commit();
+            return true;
+        }
+
+        public async Task<bool> Handle(AdicionarAssuntoCommand message, CancellationToken cancellationToken)
+        {
+            if (!ValidarComando(message)) return false;
+            ClearEntity();
+            var livro_assunto = new Livro_Autor(message.Livro_CodI, message.Assunto_CodAs);
+            await _unitOfWork.RepositoryLivroAutor.Remover(livro_assunto);
+            await _unitOfWork.RepositoryLivroAutor.Adicionar(livro_assunto);
             await _unitOfWork.Commit();
             return true;
         }

@@ -1,8 +1,8 @@
 export interface Livro {
-  CodI: Number;
+  CodI: number;
   Titulo: string;
   Editora: string;
-  Edicao: Number;
+  Edicao: number;
   AnoPublicacao: string;
 }
 

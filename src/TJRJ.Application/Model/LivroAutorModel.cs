@@ -8,8 +8,8 @@ namespace TJRJ.Application.Model
 {
     public class LivroAutorModel
     {
-        public int Livro_CodI { get; private set; }
-        public int Autor_CodAu { get; private set; }
+        public int Livro_CodI { get; set; }
+        public int Autor_CodAu { get; set; }
 
     }
 }

@@ -1,5 +1,4 @@
-<p>livro-form-alteracao works!</p>
-<div class="container mt-4">
+<div *ngIf="!this.lassuntos && !this.lautores" class="container mt-4">
   <h4 class="mb-4">Alteração de Livro</h4>
 
   <form (ngSubmit)="gravarLivro()" #tituloForm="ngForm" autocomplete="off">
@@ -38,7 +37,89 @@
       </div>
     </div>
 
+    <div class="d-flex gap-3">
+      <button type="submit" class="btn btn-primary" [disabled]="!tituloForm.form.valid">Gravar</button>
+      <button type="button" class="btn btn-info" (click)="setAssuntos(livro)" >Assuntos</button>
+      <button type="button" class="btn btn-dark" (click)="setAutores(livro)"> Autores</button>
+    </div>
 
-    <button type="submit" class="btn btn-primary" [disabled]="!tituloForm.form.valid">Gravar</button>
   </form>
+
+
+
 </div>
+
+
+<div *ngIf="this.lassuntos" class="container mt-4">
+  <h4 class="mb-3">Assuntos do Livro</h4>
+
+  <div class="mb-3 row">
+    <label for="tituloLivro" class="col-sm-2 col-form-label">Título do Livro</label>
+    <div class="col-sm-6 d-flex align-items-center">
+      <input type="text" id="tituloLivro" class="form-control" [(ngModel)]="livro.Titulo" autocomplete="off" name="titulo" required readonly>
+      <button (click)="setVoltar()" class="btn btn-secondary ms-2">Voltar</button>
+    </div>
+  </div>
+
+  <table class="table table-bordered table-hover">
+    <thead class="table-light">
+      <tr>
+        <th class="text-center col-icon"></th>
+        <th class="col-code">Código Assunto</th>
+        <th class="col-description">Descrição</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let assunto of assuntos">
+        <td class="text-center">
+          <button *ngIf="assunto.flag === 0" class="btn btn-success" (click)="incluirAssunto(assunto)">
+            <i class="bi bi-save-fill"></i> Incluir
+          </button>
+          <button *ngIf="assunto.flag !== 0" class="btn btn-danger" (click)="excluirAssunto(assunto)" >
+            <i class="bi bi-trash-fill"></i> Excluir
+          </button>
+        </td>
+        <td>{{ assunto.codAs }}</td>
+        <td>{{ assunto.descricao }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div *ngIf="this.lautores" class="container mt-4">
+  <h4 class="mb-3">Autores do Livro</h4>
+
+  <div class="mb-3 row">
+    <label for="tituloLivro" class="col-sm-2 col-form-label">Título do Livro</label>
+    <div class="col-sm-6 d-flex align-items-center">
+      <input type="text" id="tituloLivro" class="form-control" [(ngModel)]="livro.Titulo" autocomplete="off" name="titulo" required readonly>
+      <button (click)="setVoltar()" class="btn btn-secondary ms-2">Voltar</button>
+    </div>
+  </div>
+
+  <table class="table table-bordered table-hover">
+    <thead class="table-light">
+      <tr>
+        <th class="text-center col-icon"></th>
+        <th class="col-code">Código do Autor</th>
+        <th class="col-description">Nome do Autor</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let autor of autores">
+        <td class="text-center">
+          <button *ngIf="autor.flag === 0" class="btn btn-success" (click)="incluirAutor(autor)">
+            <i class="bi bi-save-fill"></i> Incluir
+          </button>
+          <button *ngIf="autor.flag !== 0" class="btn btn-danger"(click)="excluirAutor(autor)" >
+            <i class="bi bi-trash-fill"></i> Excluir
+          </button>
+        </td>
+        <td>{{ autor.codAu }}</td>
+        <td>{{ autor.nome }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+

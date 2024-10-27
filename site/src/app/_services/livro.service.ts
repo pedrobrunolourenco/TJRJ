@@ -23,6 +23,22 @@ export class LivroService {
     );
   }
 
+  listarAssuntos(id: number){
+    return this.http.get<ResultModel>(`${this.baseUrl}Livro/ObterAssuntosDoLivro?codLivro=${id}`).pipe(
+      map((response: ResultModel) => {
+        return response;
+      })
+    );
+  }
+
+  listarAutores(id: number){
+    return this.http.get<ResultModel>(`${this.baseUrl}Livro/ObterAutoresDoLivro?codLivro=${id}`).pipe(
+      map((response: ResultModel) => {
+        return response;
+      })
+    );
+  }
+
 
   obterLivroPorId(id: number) {
     return this.http.get<ResultModel>(`${this.baseUrl}Livro/ObterLivrosPorId?codLivro=${id}`).pipe(
@@ -34,6 +50,22 @@ export class LivroService {
 
   incluirLivro(livro: Livro){
     return this.http.post<ResultModel>(this.baseUrl + 'Livro/IncluirLivro', livro ).pipe(
+      map( (response: ResultModel) => {
+        return response;
+      })
+    );
+  }
+
+  incluirAutor(autor: any){
+    return this.http.post<ResultModel>(this.baseUrl + 'Livro/IncluirAutor', autor ).pipe(
+      map( (response: ResultModel) => {
+        return response;
+      })
+    );
+  }
+
+  incluirAssunto(assunto: any){
+    return this.http.post<ResultModel>(this.baseUrl + 'Livro/IncluirAssunto', assunto ).pipe(
       map( (response: ResultModel) => {
         return response;
       })

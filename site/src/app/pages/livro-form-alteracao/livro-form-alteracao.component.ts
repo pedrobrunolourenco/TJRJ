@@ -20,6 +20,12 @@ export class LivroFormAlteracaoComponent {
   {
   }
 
+  lassuntos = false;
+  lautores = false;
+
+  autores: any;
+  assuntos: any;
+
   livro: Livro = {
     CodI: 0,
     Titulo: '',
@@ -31,7 +37,6 @@ export class LivroFormAlteracaoComponent {
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
       const livroParam = params.get('livro');
-      console.log(livroParam);
       if (livroParam) {
         var json = JSON.parse(livroParam);
         this.livro.CodI = json.codigoLivro;
@@ -57,6 +62,82 @@ export class LivroFormAlteracaoComponent {
     }, (erro) => {
       this.toastr.error("Erro ao gravar livro");
     });
+  }
+
+  setAssuntos(livro: Livro) {
+    this.livroService.listarAssuntos(livro.CodI).subscribe((response: ResultModel) => {
+        this.assuntos = response.data;
+        this.lassuntos = true;
+        this.lautores = false;
+    }, () => {
+      this.toastr.error("Erro ao listar assuntos");
+    });
+  }
+
+  setAutores(livro: Livro) {
+    this.livroService.listarAutores(livro.CodI).subscribe((response: ResultModel) => {
+      this.autores = response.data;
+      this.lassuntos = false;
+      this.lautores = true;
+    }, () => {
+      this.toastr.error("Erro ao listar autores");
+    });
+  }
+
+  setVoltar() {
+    this.lassuntos = false;
+    this.lautores = false;
+  }
+
+  incluirAssunto(assunto: any) {
+    var request = {
+      Livro_CodI: this.livro.CodI,
+      Assunto_CodAs: assunto.codAs
+    }
+
+
+    this.livroService.incluirAssunto(request).subscribe((response: ResultModel) => {
+      if(response.sucesso == true){
+        this.toastr.success("Assunto incluído com sucesso" );
+        this.setAssuntos(this.livro);
+      }
+      if(response.sucesso == false){
+        response.mensagens.forEach(mensagem => {
+          this.toastr.error(mensagem);
+        });
+      }
+      }, (erro) => {
+        this.toastr.error("Erro ao gravar assunto");
+      });
+  }
+
+  excluirAssunto(assunto: any) {
+    console.log(assunto)
+  }
+
+  incluirAutor(autor: any) {
+    var request = {
+      Livro_CodI: this.livro.CodI,
+      Autor_CodAu: autor.codAu
+    }
+
+    this.livroService.incluirAutor(request).subscribe((response: ResultModel) => {
+      if(response.sucesso == true){
+        this.toastr.success("Autor incluído com sucesso" );
+        this.setAutores(this.livro);
+      }
+      if(response.sucesso == false){
+        response.mensagens.forEach(mensagem => {
+          this.toastr.error(mensagem);
+        });
+      }
+      }, (erro) => {
+        this.toastr.error("Erro ao gravar autor");
+      });
+    }
+
+  excluirAutor(autor: any) {
+    console.log(autor)
   }
 
 

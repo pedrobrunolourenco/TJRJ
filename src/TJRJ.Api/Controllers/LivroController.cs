@@ -114,6 +114,22 @@ namespace TJRJ.Api.Controllers
             }
         }
 
+        [HttpPost]
+        [Route("IncluirAssunto")]
+        public async Task<IActionResult> IncluirAssunto([FromBody] LivroAssuntoModel model)
+        {
+            try
+            {
+                var livroAssunto = await _appLivro.IncluirAssunto(model);
+                return RetornoRequest(livroAssunto, livroAssunto.ListaErros);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"IncluirAssunto => {ex.Message}");
+                return BadRequest();
+            }
+        }
+
 
         [HttpPut]
         [Route("AlterarLivro")]

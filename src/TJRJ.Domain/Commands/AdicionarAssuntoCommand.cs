@@ -3,42 +3,44 @@ using TJRJ.Domain.Core.Messages;
 
 namespace TJRJ.Domain.Commands
 {
-    public class AdicionarAutorCommand : Command
+    public class AdicionarAssuntoCommand : Command
     {
         public int Livro_CodI { get; private set; }
-        public int Autor_CodAu { get; private set; }
+        public int Assunto_CodAs { get; private set; }
 
-        public AdicionarAutorCommand(int livro_CodI, int autor_CodAu)
+
+        public AdicionarAssuntoCommand(int livro_CodI, int assunto_CodAs)
         {
             Livro_CodI = livro_CodI;
-            Autor_CodAu = autor_CodAu;
+            Assunto_CodAs = assunto_CodAs;
             AggregateId = livro_CodI;
         }
 
         public override bool EhValido()
         {
-            ValidationResult = new AdicionarAutorCommandValidation().Validate(this);
+            ValidationResult = new AdicionarAssuntoCommandValidation().Validate(this);
             return ValidationResult.IsValid;
         }
 
 
     }
 
-    public class AdicionarAutorCommandValidation : AbstractValidator<AdicionarAutorCommand>
+    public class AdicionarAssuntoCommandValidation : AbstractValidator<AdicionarAssuntoCommand>
     {
 
-        public AdicionarAutorCommandValidation()
+        public AdicionarAssuntoCommandValidation()
         {
             RuleFor(t => t.Livro_CodI)
                  .GreaterThan(0)
                  .WithMessage("Código do livro deve ser maior que zero.");
 
-            RuleFor(t => t.Autor_CodAu)
+            RuleFor(t => t.Assunto_CodAs)
                  .GreaterThan(0)
-                 .WithMessage("Código do autor deve ser maior que zero.");
+                 .WithMessage("Código do assunto deve ser maior que zero.");
 
         }
 
     }
+
 
 }

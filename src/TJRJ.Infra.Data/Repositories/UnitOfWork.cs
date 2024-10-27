@@ -46,7 +46,14 @@ namespace TJRJ.Infra.Data.Repositories
 
         public async Task Commit()
         {
-            await _context.SaveChangesAsync();
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch(Exception ex)
+            {
+                var teste = ex.Message;
+            }
         }
 
         public Task Rollback()

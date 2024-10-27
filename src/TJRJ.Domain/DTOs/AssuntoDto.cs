@@ -2,8 +2,8 @@
 {
     public class AssuntoDto
     {
-        public int CodigoAssunto { get; set; }
-        public string DescricaoAssunto { get; set; }
-
+        public int CodAs { get; set; }
+        public string Descricao { get; set; }
+        public int Flag { get; set; }
     }
 }

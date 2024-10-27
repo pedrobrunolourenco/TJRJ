@@ -2,8 +2,9 @@
 {
     public class AutorDto
     {
-        public int CodigoAutor { get; set; }
-        public string NomeAutor { get; set; }
+        public int CodAu { get; set; }
+        public string Nome { get; set; }
+        public int Flag { get; set; }
 
     }
 }

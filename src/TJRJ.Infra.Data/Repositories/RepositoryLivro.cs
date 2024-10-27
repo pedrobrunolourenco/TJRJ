@@ -25,16 +25,12 @@ namespace TJRJ.Infra.Data.Repositories
         {
             StringBuilder query = new StringBuilder();
             query.Append(@"
-                        SELECT DISTINCT 
-                                TASS.CodAs As CodigoAssunto,
-                                TASS.Descricao AS DescricaoAssunto
-                                FROM Livro L WITH(NOLOCK) 
-		                        INNER JOIN Livro_Assunto ASS WITH(NOLOCK) ON (L.CodI = ASS.Livro_CodI)
-		                        INNER JOIN Livro_Autor AUT WITH(NOLOCK) ON (L.CodI = AUT.Livro_CodI)
-		                        INNER JOIN Assunto TASS WITH(NOLOCK) ON (ASS.Assunto_CodAs = TASS.CodAs)
-		                        INNER JOIN Autor TAUT WITH(NOLOCK) ON (AUT.Autor_CodAu = TAUT.CodAu)
-                        WHERE L.CodI = @ID
-                        ORDER BY TASS.Descricao
+                                SELECT DISTINCT 
+                                        A.CodAs, A.Descricao,
+                                        ISNULL(LASS.Assunto_CodAs,0) Flag
+                                        FROM ASSUNTO A
+                                        LEFT JOIN Livro_Assunto LASS WITH(NOLOCK) ON (LASS.Assunto_CodAs = A.CodAs AND LASS.Livro_CodI=@ID )
+                                ORDER BY A.Descricao
                         ");
             var retorno = _context.Database.GetDbConnection().QueryAsync<AssuntoDto>(query.ToString(), new { ID = codId }).Result.ToList();
             return retorno;
@@ -45,15 +41,11 @@ namespace TJRJ.Infra.Data.Repositories
             StringBuilder query = new StringBuilder();
             query.Append(@"
                             SELECT DISTINCT 
-                                    TAUT.CodAu As CodigoAutor,
-                                    TAUT.Nome AS NomeAutor
-                                    FROM Livro L WITH(NOLOCK) 
-		                            INNER JOIN Livro_Assunto ASS WITH(NOLOCK) ON (L.CodI = ASS.Livro_CodI)
-		                            INNER JOIN Livro_Autor AUT WITH(NOLOCK) ON (L.CodI = AUT.Livro_CodI)
-		                            INNER JOIN Assunto TASS WITH(NOLOCK) ON (ASS.Assunto_CodAs = TASS.CodAs)
-		                            INNER JOIN Autor TAUT WITH(NOLOCK) ON (AUT.Autor_CodAu = TAUT.CodAu)
-                            WHERE L.CodI = @ID
-                            ORDER BY TAUT.Nome
+                                    A.CodAu, A.Nome,
+                                    ISNULL(LAU.Autor_CodAu,0) Flag
+                                    FROM AUTOR A
+                                    LEFT JOIN Livro_Autor LAU WITH(NOLOCK) ON (LAU.Autor_CodAu = A.CodAu AND LAU.Livro_CodI=@ID )
+                            ORDER BY A.Nome
                         ");
             var retorno = _context.Database.GetDbConnection().QueryAsync<AutorDto>(query.ToString(), new { ID = codId }).Result.ToList();
             return retorno;
