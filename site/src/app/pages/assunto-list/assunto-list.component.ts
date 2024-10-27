@@ -9,73 +9,75 @@ import * as bootstrap from 'bootstrap';
 @Component({
   selector: 'app-assunto-list',
   templateUrl: './assunto-list.component.html',
-  styleUrl: './assunto-list.component.css'
+  styleUrls: ['./assunto-list.component.css']
 })
 export class AssuntoListComponent implements OnInit {
 
-  constructor(private assuntoService: AssuntoService,
-    private router: Router,
-    private toastr: ToastrService) {}
-
   assuntoParaExcluir: any;
-  assuntos : any;
+  assuntos: any;
+  modalInstance: any;
+
+  constructor(
+    private assuntoService: AssuntoService,
+    private router: Router,
+    private toastr: ToastrService
+  ) {}
 
   ngOnInit(): void {
-
     this.assuntoService.listarAssuntos().subscribe((response: ResultModel) => {
-      if(response.sucesso == true){
+      if (response.sucesso) {
         this.assuntos = response.data;
       }
-     }, () => {
-        this.toastr.error("Erro ao listar Perfis");
-     });
-
+    }, () => {
+      this.toastr.error("Erro ao listar Perfis");
+    });
   }
 
-  editarAssunto(assunto: Assunto){
+  editarAssunto(assunto: Assunto) {
     this.assuntoService.assunto = assunto;
     this.router.navigate(['/assunto/editar', { assunto: JSON.stringify(assunto) }]);
   }
 
-
   setAssuntoParaExcluir(assunto: any) {
     this.assuntoParaExcluir = assunto;
     const modalElement = document.getElementById('confirmDeleteModal');
-    const modalInstance = new bootstrap.Modal(modalElement); // Usando a importação
-    modalInstance.show();
-    const backdrop = document.querySelector('.modal-backdrop');
-    if (backdrop) {
-      backdrop.remove();
+
+    if (modalElement) {  // Verifica se o modalElement existe
+      this.modalInstance = new bootstrap.Modal(modalElement, { backdrop: 'static' });
+      this.modalInstance.show();
+
+      modalElement.addEventListener('hidden.bs.modal', () => {
+        this.removeBackdrop();
+      });
+    } else {
+      console.error("Modal element 'confirmDeleteModal' not found.");
+    }
+  }
+
+  fecharModal() {
+    if (this.modalInstance) {
+      this.modalInstance.hide();
     }
   }
 
   confirmarExclusao() {
     this.excluirAssunto(this.assuntoParaExcluir);
+    this.fecharModal();
   }
 
   excluirAssunto(assunto: any) {
-
-    console.log(assunto)
-
     this.assuntoService.excluirAssunto(assunto.assunto.codigoAssunto).subscribe((response: ResultModel) => {
-      if(response.sucesso == true){
-        this.toastr.error("Assunto Excluído com sucesso");
+      if (response.sucesso) {
+        this.toastr.success("Assunto Excluído com sucesso");
         this.ngOnInit();
       }
-     }, () => {
-        this.toastr.error("Erro ao excluir assunto");
-     });
+    }, () => {
+      this.toastr.error("Erro ao excluir assunto");
+    });
+    this.fecharModal();
+  }
 
-     const modalElement = document.getElementById('confirmDeleteModal');
-     const modalInstance = bootstrap.Modal.getInstance(modalElement);
-     modalInstance.hide();
-     const backdrop = document.querySelector('.modal-backdrop');
-     if (backdrop) {
-       backdrop.remove();
-     }
-
+  private removeBackdrop() {
+    document.querySelectorAll('.modal-backdrop').forEach(backdrop => backdrop.remove());
   }
 }
-
-
-
