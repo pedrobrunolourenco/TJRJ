@@ -6,7 +6,6 @@ using TJRJ.Domain.Commands;
 using TJRJ.Domain.Core.Mediator;
 using TJRJ.Domain.Core.Messages.CommonMessages;
 using TJRJ.Domain.DTOs;
-using TJRJ.Domain.Entities;
 using TJRJ.Domain.Queries;
 
 namespace TJRJ.Application.Services
@@ -39,6 +38,16 @@ namespace TJRJ.Application.Services
         public async Task<LivroDto> ObterLivroPorId(int codLivro)
         {
             return await _livroQuery.ObterLivroPorId(codLivro);
+        }
+
+        public async Task<IEnumerable<AssuntoDto>> ObterAssuntosDoLivro(int codLivro)
+        {
+            return await _livroQuery.ObterAssuntosDoLivro(codLivro);
+        }
+
+        public async Task<IEnumerable<AutorDto>> ObterAutoresDoLivro(int codLivro)
+        {
+            return await _livroQuery.ObterAutoresDoLivro(codLivro);
         }
 
 

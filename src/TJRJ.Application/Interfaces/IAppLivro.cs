@@ -12,6 +12,9 @@ namespace TJRJ.Application.Interfaces
 
         Task<IEnumerable<LivroDto>> ObterTodosOsLivros();
         Task<LivroDto> ObterLivroPorId(int codLivro);
+        Task<IEnumerable<AssuntoDto>> ObterAssuntosDoLivro(int codLivro);
+        Task<IEnumerable<AutorDto>> ObterAutoresDoLivro(int codLivro);
+
 
     }
 }

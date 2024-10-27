@@ -21,6 +21,44 @@ namespace TJRJ.Infra.Data.Repositories
             return await DbSet.AsNoTracking().FirstOrDefaultAsync(e => e.CodI == id);
         }
 
+        public async Task<IEnumerable<AssuntoDto>> ObterAssuntosDoLivro(int codId)
+        {
+            StringBuilder query = new StringBuilder();
+            query.Append(@"
+                        SELECT DISTINCT 
+                                TASS.CodAs As CodigoAssunto,
+                                TASS.Descricao AS DescricaoAssunto
+                                FROM Livro L WITH(NOLOCK) 
+		                        INNER JOIN Livro_Assunto ASS WITH(NOLOCK) ON (L.CodI = ASS.Livro_CodI)
+		                        INNER JOIN Livro_Autor AUT WITH(NOLOCK) ON (L.CodI = AUT.Livro_CodI)
+		                        INNER JOIN Assunto TASS WITH(NOLOCK) ON (ASS.Assunto_CodAs = TASS.CodAs)
+		                        INNER JOIN Autor TAUT WITH(NOLOCK) ON (AUT.Autor_CodAu = TAUT.CodAu)
+                        WHERE L.CodI = @ID
+                        ORDER BY TASS.Descricao
+                        ");
+            var retorno = _context.Database.GetDbConnection().QueryAsync<AssuntoDto>(query.ToString(), new { ID = codId }).Result.ToList();
+            return retorno;
+        }
+
+        public async Task<IEnumerable<AutorDto>> ObterAutoresDoLivro(int codId)
+        {
+            StringBuilder query = new StringBuilder();
+            query.Append(@"
+                            SELECT DISTINCT 
+                                    TAUT.CodAu As CodigoAutor,
+                                    TAUT.Nome AS NomeAutor
+                                    FROM Livro L WITH(NOLOCK) 
+		                            INNER JOIN Livro_Assunto ASS WITH(NOLOCK) ON (L.CodI = ASS.Livro_CodI)
+		                            INNER JOIN Livro_Autor AUT WITH(NOLOCK) ON (L.CodI = AUT.Livro_CodI)
+		                            INNER JOIN Assunto TASS WITH(NOLOCK) ON (ASS.Assunto_CodAs = TASS.CodAs)
+		                            INNER JOIN Autor TAUT WITH(NOLOCK) ON (AUT.Autor_CodAu = TAUT.CodAu)
+                            WHERE L.CodI = @ID
+                            ORDER BY TAUT.Nome
+                        ");
+            var retorno = _context.Database.GetDbConnection().QueryAsync<AutorDto>(query.ToString(), new { ID = codId }).Result.ToList();
+            return retorno;
+        }
+
         public async Task<LivroDto> ObterLivroPorId(int codId)
         {
             StringBuilder query = new StringBuilder();

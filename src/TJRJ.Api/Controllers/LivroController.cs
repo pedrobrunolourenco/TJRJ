@@ -50,7 +50,37 @@ namespace TJRJ.Api.Controllers
             }
         }
 
+        [HttpGet]
+        [Route("ObterAssuntosDoLivro")]
+        public async Task<IActionResult> ObterAssuntosDoLivro(int codLivro)
+        {
+            try
+            {
+                var assuntos = await _appLivro.ObterAssuntosDoLivro(codLivro);
+                return RetornoRequest(assuntos);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"ObterAssuntosDoLivro => {ex.Message}");
+                return BadRequest();
+            }
+        }
 
+        [HttpGet]
+        [Route("ObterAutoresDoLivro")]
+        public async Task<IActionResult> ObterAutoresDoLivro(int codLivro)
+        {
+            try
+            {
+                var autores = await _appLivro.ObterAutoresDoLivro(codLivro);
+                return RetornoRequest(autores);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"ObterAutoresDoLivro => {ex.Message}");
+                return BadRequest();
+            }
+        }
 
         [HttpPost]
         [Route("IncluirLivro")]

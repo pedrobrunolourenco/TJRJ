@@ -8,5 +8,8 @@ namespace TJRJ.Domain.Interfaces.Repository
         Task<Livro> BuscarLivroPorId(int id);
         Task<IEnumerable<LivroDto>> ObterTodosOsLivros();
         Task<LivroDto> ObterLivroPorId(int codId);
+        Task<IEnumerable<AutorDto>> ObterAutoresDoLivro(int codId);
+        Task<IEnumerable<AssuntoDto>> ObterAssuntosDoLivro(int codId);
+
     }
 }
