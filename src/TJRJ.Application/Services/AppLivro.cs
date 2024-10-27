@@ -6,6 +6,7 @@ using TJRJ.Domain.Commands;
 using TJRJ.Domain.Core.Mediator;
 using TJRJ.Domain.Core.Messages.CommonMessages;
 using TJRJ.Domain.DTOs;
+using TJRJ.Domain.Entities;
 using TJRJ.Domain.Queries;
 
 namespace TJRJ.Application.Services
@@ -52,6 +53,15 @@ namespace TJRJ.Application.Services
             return livroRetorno;
         }
 
+        public async Task<LivroAutorRetornoModel> IncluirAutor(LivroAutorModel livroAutor)
+        {
+            var command = new AdicionarAutorCommand(livroAutor.Livro_CodI, livroAutor.Autor_CodAu);
+            await _mediatrHandler.EnviarCommand(command);
+            var livroAutorRetorno = new LivroAutorRetornoModel();
+            livroAutorRetorno.LivroAutor = livroAutor;
+            livroAutorRetorno.ListaErros = ObterMensagensDeErro();
+            return livroAutorRetorno;
+        }
         public async Task<LivroRetornoModel> AlterarLivro(LivroModel livro)
         {
             var command = new AlterarLivroCommand(livro.CodI, livro.Titulo, livro.Editora, livro.Edicao, livro.AnoPublicacao, livro.CodigoAssunto, livro.CodigoAutor);

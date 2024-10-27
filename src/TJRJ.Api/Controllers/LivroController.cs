@@ -68,6 +68,23 @@ namespace TJRJ.Api.Controllers
             }
         }
 
+        [HttpPost]
+        [Route("IncluirAutor")]
+        public async Task<IActionResult> IncluirAutor([FromBody] LivroAutorModel model)
+        {
+            try
+            {
+                var livroAutor = await _appLivro.IncluirAutor(model);
+                return RetornoRequest(livroAutor, livroAutor.ListaErros);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"IncluirAutor => {ex.Message}");
+                return BadRequest();
+            }
+        }
+
+
         [HttpPut]
         [Route("AlterarLivro")]
         public async Task<IActionResult> AlterarLivro([FromBody] LivroModel model)
