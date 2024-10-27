@@ -1,8 +1,6 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using TJRJ.Application.Interfaces;
 using TJRJ.Application.Model;
-using TJRJ.Application.Services;
 
 namespace TJRJ.Api.Controllers
 {
@@ -35,6 +33,23 @@ namespace TJRJ.Api.Controllers
                 return BadRequest();
             }
         }
+
+        [HttpGet]
+        [Route("ObterLivrosPorId")]
+        public async Task<IActionResult> ObterLivroPorId(int codLivro)
+        {
+            try
+            {
+                var livro = await _appLivro.ObterLivroPorId(codLivro);
+                return RetornoRequest(livro);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"ObterLivroPorId => {ex.Message}");
+                return BadRequest();
+            }
+        }
+
 
 
         [HttpPost]

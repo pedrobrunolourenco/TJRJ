@@ -35,6 +35,12 @@ namespace TJRJ.Application.Services
             return await _livroQuery.ObterTodosOsLivros();
         }
 
+        public async Task<LivroDto> ObterLivroPorId(int codLivro)
+        {
+            return await _livroQuery.ObterLivroPorId(codLivro);
+        }
+
+
         public async Task<LivroRetornoModel> IncluirLivro(LivroModel livro)
         {
 

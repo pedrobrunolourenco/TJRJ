@@ -9,6 +9,7 @@ namespace TJRJ.Application.Interfaces
         Task<LivroRetornoModel> AlterarLivro(LivroModel livro);
         Task<LivroRetornoModel> ExcluirLivro(int codLivro);
         Task<IEnumerable<LivroDto>> ObterTodosOsLivros();
+        Task<LivroDto> ObterLivroPorId(int codLivro);
 
     }
 }

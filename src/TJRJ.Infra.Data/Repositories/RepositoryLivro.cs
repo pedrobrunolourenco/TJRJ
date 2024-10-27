@@ -21,6 +21,29 @@ namespace TJRJ.Infra.Data.Repositories
             return await DbSet.AsNoTracking().FirstOrDefaultAsync(e => e.CodI == id);
         }
 
+        public async Task<LivroDto> ObterLivroPorId(int codId)
+        {
+            StringBuilder query = new StringBuilder();
+            query.Append(@"
+                            SELECT DISTINCT L.CodI AS CodigoLivro, 
+                                            L.Titulo,
+                                            L.Editora,
+                                            L.Edicao,
+                                            L.AnoPublicacao,
+				                            TASS.Descricao AS Assunto,
+				                            TAUT.Nome AS Autor
+                                    FROM Livro L WITH(NOLOCK) 
+		                            INNER JOIN Livro_Assunto ASS WITH(NOLOCK) ON (L.CodI = ASS.Livro_CodI)
+		                            INNER JOIN Livro_Autor AUT WITH(NOLOCK) ON (L.CodI = AUT.Livro_CodI)
+		                            INNER JOIN Assunto TASS WITH(NOLOCK) ON (ASS.Assunto_CodAs = TASS.CodAs)
+		                            INNER JOIN Autor TAUT WITH(NOLOCK) ON (AUT.Autor_CodAu = TAUT.CodAu)
+                            WHERE L.CodI = @ID
+                            ORDER BY TAUT.Nome
+
+                        ");
+            var retorno = _context.Database.GetDbConnection().QueryAsync<LivroDto>(query.ToString(), new { ID = codId }).Result.ToList().FirstOrDefault();
+            return retorno;
+        }
 
         public async Task<IEnumerable<LivroDto>> ObterTodosOsLivros()
         {

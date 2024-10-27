@@ -18,6 +18,11 @@ namespace TJRJ.Domain.Queries
             _repositoryLivro = repositoryLivro;
         }
 
+        public async Task<LivroDto> ObterLivroPorId(int codLivro)
+        {
+            return await _repositoryLivro.ObterLivroPorId(codLivro);
+        }
+
         public async Task<IEnumerable<LivroDto>> ObterTodosOsLivros()
         {
             return await _repositoryLivro.ObterTodosOsLivros();
