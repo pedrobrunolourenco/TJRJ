@@ -94,8 +94,6 @@ export class LivroFormAlteracaoComponent {
       Livro_CodI: this.livro.CodI,
       Assunto_CodAs: assunto.codAs
     }
-
-
     this.livroService.incluirAssunto(request).subscribe((response: ResultModel) => {
       if(response.sucesso == true){
         this.toastr.success("Assunto incluído com sucesso" );
@@ -112,7 +110,23 @@ export class LivroFormAlteracaoComponent {
   }
 
   excluirAssunto(assunto: any) {
-    console.log(assunto)
+    var request = {
+      Livro_CodI: this.livro.CodI,
+      Assunto_CodAs: assunto.codAs
+    }
+    this.livroService.excluirAssunto(request).subscribe((response: ResultModel) => {
+      if(response.sucesso == true){
+        this.toastr.success("Assunto excluído com sucesso" );
+        this.setAssuntos(this.livro);
+      }
+      if(response.sucesso == false){
+        response.mensagens.forEach(mensagem => {
+          this.toastr.error(mensagem);
+        });
+      }
+      }, (erro) => {
+        this.toastr.error("Erro ao excluir assunto");
+      });
   }
 
   incluirAutor(autor: any) {
@@ -137,7 +151,24 @@ export class LivroFormAlteracaoComponent {
     }
 
   excluirAutor(autor: any) {
-    console.log(autor)
+    var request = {
+      Livro_CodI: this.livro.CodI,
+      Autor_CodAu: autor.codAu
+    }
+
+    this.livroService.excluirAutor(request).subscribe((response: ResultModel) => {
+      if(response.sucesso == true){
+        this.toastr.success("Autor excluído com sucesso" );
+        this.setAutores(this.livro);
+      }
+      if(response.sucesso == false){
+        response.mensagens.forEach(mensagem => {
+          this.toastr.error(mensagem);
+        });
+      }
+      }, (erro) => {
+        this.toastr.error("Erro ao excluir autor");
+      });
   }
 
 

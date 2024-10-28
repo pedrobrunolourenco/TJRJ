@@ -10,6 +10,8 @@ namespace TJRJ.Application.Interfaces
         Task<LivroRetornoModel> ExcluirLivro(int codLivro);
         Task<LivroAutorRetornoModel> IncluirAutor(LivroAutorModel livroAutor);
         Task<LivroAssuntoRetornoModel> IncluirAssunto(LivroAssuntoModel livroAssunto);
+        Task<LivroAutorRetornoModel> ExcluirAutor(LivroAutorModel livroAutor);
+        Task<LivroAssuntoRetornoModel> ExcluirAssunto(LivroAssuntoModel livroAssunto);
 
         Task<IEnumerable<LivroDto>> ObterTodosOsLivros();
         Task<LivroDto> ObterLivroPorId(int codLivro);

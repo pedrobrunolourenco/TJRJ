@@ -6,6 +6,7 @@ using TJRJ.Domain.Commands;
 using TJRJ.Domain.Core.Mediator;
 using TJRJ.Domain.Core.Messages.CommonMessages;
 using TJRJ.Domain.DTOs;
+using TJRJ.Domain.Entities;
 using TJRJ.Domain.Queries;
 
 namespace TJRJ.Application.Services
@@ -112,6 +113,35 @@ namespace TJRJ.Application.Services
             };
             livroRetorno.ListaErros = ObterMensagensDeErro();
             return livroRetorno;
+        }
+
+
+        public async Task<LivroAutorRetornoModel> ExcluirAutor(LivroAutorModel livroAutor)
+        {
+            var command = new ExcluirAutorCommand(livroAutor.Livro_CodI, livroAutor.Autor_CodAu);
+            await _mediatrHandler.EnviarCommand(command);
+            var livroAutorRetorno = new LivroAutorRetornoModel();
+            livroAutorRetorno.LivroAutor = new LivroAutorModel
+            {
+               Livro_CodI = livroAutor.Livro_CodI,
+               Autor_CodAu = livroAutor.Autor_CodAu
+            };
+            livroAutorRetorno.ListaErros = ObterMensagensDeErro();
+            return livroAutorRetorno;
+        }
+
+        public async Task<LivroAssuntoRetornoModel> ExcluirAssunto(LivroAssuntoModel livroAssunto)
+        {
+            var command = new ExcluirAssuntoCommand(livroAssunto.Livro_CodI, livroAssunto.Assunto_CodAs);
+            await _mediatrHandler.EnviarCommand(command);
+            var livroAssuntoRetorno = new LivroAssuntoRetornoModel();
+            livroAssuntoRetorno.LivroAssunto = new LivroAssuntoModel
+            {
+                Livro_CodI = livroAssunto.Livro_CodI,
+                Assunto_CodAs = livroAssunto.Assunto_CodAs
+            };
+            livroAssuntoRetorno.ListaErros = ObterMensagensDeErro();
+            return livroAssuntoRetorno;
         }
 
 

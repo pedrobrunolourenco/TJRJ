@@ -40,6 +40,8 @@ namespace TJRJ.Ioc
             services.AddScoped<IRequestHandler<ExcluirLivroCommand, bool>, LivroCommandHandler>();
             services.AddScoped<IRequestHandler<AdicionarAutorCommand, bool>, LivroCommandHandler>();
             services.AddScoped<IRequestHandler<AdicionarAssuntoCommand, bool>, LivroCommandHandler>();
+            services.AddScoped<IRequestHandler<ExcluirAssuntoCommand, bool>, LivroCommandHandler>();
+            services.AddScoped<IRequestHandler<ExcluirAutorCommand, bool>, LivroCommandHandler>();
             services.AddScoped<IAppLivro, AppLivro>();
             services.AddScoped<IRepositoryLivro, RepositoryLivro>();
             services.AddScoped<IRepositoryLivroAutor, RepositoryLivroAutor>();

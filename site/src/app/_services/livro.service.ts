@@ -64,6 +64,14 @@ export class LivroService {
     );
   }
 
+  excluirAutor(autor: any){
+    return this.http.post<ResultModel>(this.baseUrl + 'Livro/ExcluirAutor', autor ).pipe(
+      map( (response: ResultModel) => {
+        return response;
+      })
+    );
+  }
+
   incluirAssunto(assunto: any){
     return this.http.post<ResultModel>(this.baseUrl + 'Livro/IncluirAssunto', assunto ).pipe(
       map( (response: ResultModel) => {
@@ -71,6 +79,15 @@ export class LivroService {
       })
     );
   }
+
+  excluirAssunto(assunto: any){
+    return this.http.post<ResultModel>(this.baseUrl + 'Livro/ExcluirAssunto', assunto ).pipe(
+      map( (response: ResultModel) => {
+        return response;
+      })
+    );
+  }
+
 
   alterarLivro(livro: Livro){
     return this.http.put<ResultModel>(this.baseUrl + 'Livro/AlterarLivro', livro ).pipe(

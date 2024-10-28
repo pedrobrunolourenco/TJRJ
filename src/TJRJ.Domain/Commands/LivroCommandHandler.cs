@@ -12,7 +12,10 @@ namespace TJRJ.Domain.Commands
         IRequestHandler<AlterarLivroCommand, bool>,
         IRequestHandler<ExcluirLivroCommand, bool>,
         IRequestHandler<AdicionarAutorCommand, bool>,
-        IRequestHandler<AdicionarAssuntoCommand, bool>
+        IRequestHandler<AdicionarAssuntoCommand, bool>,
+        IRequestHandler<ExcluirAutorCommand, bool>,
+        IRequestHandler<ExcluirAssuntoCommand, bool>
+
     {
 
         private readonly IMediatrHandler _mediatorHandler;
@@ -29,6 +32,25 @@ namespace TJRJ.Domain.Commands
             _notifications = (DomainNotificationHandler)notifications;
             _unitOfWork = unitOfWork;
         }
+
+        public async  Task<bool> Handle(ExcluirAutorCommand message, CancellationToken cancellationToken)
+        {
+            ClearEntity();
+            var livro_autor = new Livro_Autor(message.Livro_CodI, message.Autor_CodAu);
+            await _unitOfWork.RepositoryLivroAutor.Remover(livro_autor);
+            await _unitOfWork.Commit();
+            return true;
+        }
+
+        public async Task<bool> Handle(ExcluirAssuntoCommand message, CancellationToken cancellationToken)
+        {
+            ClearEntity();
+            var livro_assunto = new Livro_Assunto(message.Livro_CodI, message.Assunto_CodAs);
+            await _unitOfWork.RepositoryLivroAssunto.Remover(livro_assunto);
+            await _unitOfWork.Commit();
+            return true;
+        }
+
         public async Task<bool> Handle(AlterarLivroCommand message, CancellationToken cancellationToken)
         {
             if (!ValidarComando(message)) return false;
@@ -68,9 +90,9 @@ namespace TJRJ.Domain.Commands
         {
             if (!ValidarComando(message)) return false;
             ClearEntity();
-            var livro_assunto = new Livro_Autor(message.Livro_CodI, message.Assunto_CodAs);
-            await _unitOfWork.RepositoryLivroAutor.Remover(livro_assunto);
-            await _unitOfWork.RepositoryLivroAutor.Adicionar(livro_assunto);
+            var livro_assunto = new Livro_Assunto(message.Livro_CodI, message.Assunto_CodAs);
+            await _unitOfWork.RepositoryLivroAssunto.Remover(livro_assunto);
+            await _unitOfWork.RepositoryLivroAssunto.Adicionar(livro_assunto);
             await _unitOfWork.Commit();
             return true;
         }

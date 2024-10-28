@@ -115,6 +115,23 @@ namespace TJRJ.Api.Controllers
         }
 
         [HttpPost]
+        [Route("ExcluirAutor")]
+        public async Task<IActionResult> ExcluirAutor([FromBody] LivroAutorModel model)
+        {
+            try
+            {
+                var livroAutor = await _appLivro.ExcluirAutor(model);
+                return RetornoRequest(livroAutor, livroAutor.ListaErros);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"ExcluirAutor => {ex.Message}");
+                return BadRequest();
+            }
+        }
+
+
+        [HttpPost]
         [Route("IncluirAssunto")]
         public async Task<IActionResult> IncluirAssunto([FromBody] LivroAssuntoModel model)
         {
@@ -129,6 +146,23 @@ namespace TJRJ.Api.Controllers
                 return BadRequest();
             }
         }
+
+        [HttpPost]
+        [Route("ExcluirAssunto")]
+        public async Task<IActionResult> ExcluirAssunto([FromBody] LivroAssuntoModel model)
+        {
+            try
+            {
+                var livroAssunto = await _appLivro.ExcluirAssunto(model);
+                return RetornoRequest(livroAssunto, livroAssunto.ListaErros);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"ExcluirAssunto => {ex.Message}");
+                return BadRequest();
+            }
+        }
+
 
 
         [HttpPut]
